@@ -1,0 +1,10 @@
+{
+  "author": "Clink",
+  "enabled": true,
+  "icon": "speedometer",
+  "id": "wpm-spacebar",
+  "name": "WPM Spacebar",
+  "source": "# Shows your live typing speed on the space bar.\n#\n# The switch appears under Keys > Space bar in the app. While it is on, the\n# plugin owns the space bar caption and refreshes it after every word.\n\ndef initial():\n    return {\"on\": False}\n\ndef settings(state):\n    return section(\"keys.spacebar\", [\n        toggle(\"Show typing speed\", state[\"on\"], action=\"toggle\"),\n        text(\"Replaces the space bar text with your words per minute while you type.\", size=12, color=\"gray\"),\n    ], title=\"WPM Spacebar\")\n\ndef on_action(action, value, state):\n    if action == \"toggle\":\n        state[\"on\"] = value\n        if value:\n            claim(\"spacebar.text\")\n            space_text(label(0))\n        else:\n            release(\"spacebar.text\")\n            space_text(None)\n    return state\n\ndef on_open(state):\n    if state[\"on\"]:\n        space_text(label(stats()[\"wpm\"]))\n    return state\n\ndef on_word(word, state):\n    if state[\"on\"]:\n        space_text(label(stats()[\"wpm\"]))\n    return state\n\ndef label(wpm):\n    # The rate needs a few words in the window before it means anything.\n    return f\"{wpm} wpm\" if wpm > 0 else \"wpm\"\n",
+  "summary": "Show your typing speed on the space bar",
+  "version": "1.0"
+}

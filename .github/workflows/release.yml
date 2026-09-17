@@ -1,0 +1,16 @@
+name: Release plugins
+on:
+  push:
+    branches: [main]
+    paths: ["Plugins/**", "tools/**", ".github/workflows/release.yml"]
+permissions: { contents: write }
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/build-manifest.py
+      - run: gh release delete latest --yes || true
+        env: { GH_TOKEN: "${{ github.token }}" }
+      - run: gh release create latest Plugins/*.clinkplugin manifest.json --title "Latest plugins" --latest
+        env: { GH_TOKEN: "${{ github.token }}" }

@@ -1,0 +1,13 @@
+# Verify this Clink plugins repository
+
+Read `README.md`, `PROMPT.md`, each `Plugins/*.clinkplugin`, and `tools/build-manifest.py`. Audit without changing files unless asked to remediate a finding.
+
+Parse every plugin JSON, then run:
+
+```sh
+python3 tools/build-manifest.py
+```
+
+Verify each plugin has a unique stable `id`, visible `name`, valid SF Symbol `icon`, concise `summary`, a `version`, an `enabled` state, and a `source` string defining at least one of the hooks (`initial`, `settings`, `on_action`, `on_open`, `on_close`, `on_key`, `on_word`). Inspect the source against the existing plugins. It must be small, offline and deterministic; it must import nothing beyond `math`, `random`, `time`, `json` and `re`, and must not use `open`, `eval`, `exec`, `compile` or double-underscore names. A plugin that calls `claim(...)` must call `release(...)` on the matching off path. An `on_key` hook must do very little work.
+
+Confirm the regenerated `manifest.json` represents exactly the plugin files and check that release workflows and source-policy protections have not been weakened. Report commands, pass/fail status for every plugin, manifest status, and exact paths plus fixes for any finding. Never claim runtime testing unless it was actually done in Clink.

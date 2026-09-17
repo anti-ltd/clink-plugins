@@ -1,0 +1,17 @@
+# Create a Clink plugin
+
+You are contributing one focused plugin for Clink. Read `README.md`, inspect the existing `Plugins/*.clinkplugin` files, and inspect `tools/build-manifest.py` before editing. Create or update exactly one plugin file in `Plugins/`.
+
+A plugin is JSON with a stable `id`, visible `name`, SF Symbol `icon`, concise `summary`, `version`, `author`, `enabled` state, and a `source` string. The source is PyMini (a Python subset) and defines one or more of the hooks: `initial()`, `settings(state)`, `on_action(action, value, state)`, `on_open(state)`, `on_close(state)`, `on_key(key, state)`, `on_word(word, state)`. Every hook takes `state` last and returns it.
+
+Draw the plugin's controls in `settings(state)` with the panel builders (`vstack`, `hstack`, `text`, `toggle`, `slider`, `stepper`, `segmented`, `button`, `row`, `field`). Wrap the controls that belong on a native screen in `section("keys.spacebar", [...], title=...)`. The commands a plugin has on top of a panel's are `space_text(text)`, `claim("spacebar.text")` and `release("spacebar.text")`; the reads are `stats()` (a dict with `wpm`, `peak_wpm`, `keystrokes`, `words`, `streak`) and `setting(name)` for `spacebar.text`, `spacebar.size`, `language`, `layout`, `theme` and `analytics`. A plugin that claims a control must release it when its switch is turned off.
+
+Keep the plugin small, offline and deterministic. `on_key` runs on every keystroke, so keep that hook cheap or leave it out. Use no imports beyond `math`, `random`, `time`, `json` and `re`; never `open`, `eval`, `exec`, `compile` or names with double underscores. Treat everything it inserts as user-facing text and preserve Unicode.
+
+Use a unique id and a descriptive kebab-case filename. Check that the JSON parses and think through the empty, first-word and long-session cases. Then run:
+
+```sh
+python3 tools/build-manifest.py
+```
+
+Include the regenerated `manifest.json` if changed. Do not alter the release workflow or the source policy. Finish by explaining which hooks the plugin defines, what it puts on the keyboard, and the checks performed.

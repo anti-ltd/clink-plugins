@@ -1,0 +1,16 @@
+{
+  "version": "latest",
+  "plugins": [
+    {
+      "id": "wpm-spacebar",
+      "name": "WPM Spacebar",
+      "version": "1.0",
+      "asset": {
+        "path": "wpm-spacebar.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-spacebar.clinkplugin",
+        "sha256": "83619d9b72692ce51cf5fb9f52d8f36042e5b0a71d4b41e6ad5d704fffb0beea",
+        "byteCount": 1408
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "wpm-sparkline",
+  "name": "WPM Sparkline",
+  "icon": "waveform.path.ecg",
+  "summary": "A live graph of your typing speed, for a custom layout",
+  "version": "1.0",
+  "author": "Clink",
+  "enabled": true,
+  "source": "# A sparkline of your typing speed, drawn on a key.\n#\n# This plugin offers a layout element rather than a setting: add it from\n# Layout > Arrange > Element and pick \"WPM sparkline\". The plugin samples the\n# live rate once a second and draws the last half minute of it.\n\nPOINTS = 30\n\ndef initial():\n    return {\"history\": []}\n\ndef elements(state):\n    return [element(\"sparkline\", \"WPM sparkline\", icon=\"waveform.path.ecg\", width=3)]\n\ndef on_open(state):\n    # Each session draws its own line; yesterday's speed is not news.\n    state[\"history\"] = []\n    return state\n\ndef on_tick(state):\n    history = state[\"history\"]\n    history.append(stats()[\"wpm\"])\n    state[\"history\"] = history[-POINTS:]\n    return state\n\ndef draw(id, state):\n    history = state[\"history\"]\n    rate = history[-1] if history else 0\n    # A ceiling of at least 60 keeps a slow line looking slow instead of\n    # filling the key, and the number says what the shape cannot.\n    top = max(60, max(history) if history else 0)\n    return hstack([\n        sparkline(history, min=0, max=top, fill=True),\n        text(f\"{rate}\", size=12, weight=\"semibold\"),\n    ], spacing=5, align=\"center\")\n\ndef settings(state):\n    return vstack([\n        text(\"Add the sparkline to a custom layout from Layout > Arrange > Element.\",\n             size=13, color=\"gray\"),\n        sparkline(state[\"history\"], min=0, fill=True),\n    ])\n"
+}

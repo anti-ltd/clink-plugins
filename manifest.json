@@ -4,12 +4,23 @@
     {
       "id": "wpm-spacebar",
       "name": "WPM Spacebar",
-      "version": "1.0",
+      "version": "1.2",
       "asset": {
         "path": "wpm-spacebar.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-spacebar.clinkplugin",
-        "sha256": "83619d9b72692ce51cf5fb9f52d8f36042e5b0a71d4b41e6ad5d704fffb0beea",
-        "byteCount": 1408
+        "sha256": "d2b15894a05489c28a37166c8c0141b6fcf32e8aed2b251bec47195c8d214f07",
+        "byteCount": 1577
+      }
+    },
+    {
+      "id": "wpm-sparkline",
+      "name": "WPM Sparkline",
+      "version": "1.0",
+      "asset": {
+        "path": "wpm-sparkline.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-sparkline.clinkplugin",
+        "sha256": "1eb7af2cc858dfcf69fb2697cc528dbb9425f25e6ba5d5a1ef582b50f2838523",
+        "byteCount": 1691
       }
     }
   ]

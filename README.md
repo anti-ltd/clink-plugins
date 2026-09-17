@@ -30,12 +30,27 @@ A plugin script may define any of these functions:
 | `settings(state)` | Whenever the app draws the plugin's controls. Returns a node tree built with the panel builders (`vstack`, `toggle`, `slider`, ...). Wrap part of it in `section("keys.spacebar", [...])` and it also appears on that screen in the app. |
 | `on_action(action, value, state)` | A control was used. |
 | `on_open(state)` / `on_close(state)` | The keyboard appeared or is going away. |
-| `on_key(key, state)` | A key inserted text. |
-| `on_word(word, state)` | A word was committed. |
+| `on_key(key, state)` | A key inserted text. Runs after the text is in, so `" "` means the space is already typed. |
+| `on_word(word, state)` | A word was committed, with autocorrect already applied. |
+| `on_backspace(state)` | Delete was pressed. |
+| `on_suggestion(word, state)` | A suggestion bar word was tapped. |
+| `on_language(code, state)` | The typing language changed, for example to `"de"`. |
+| `on_field(kind, state)` | The keyboard moved to a different kind of field: `"default"`, `"email"`, `"url"`, `"number"`, `"phone"`, `"search"` or `"password"`. |
+| `on_tick(state)` | Once a second while the keyboard is on screen, whether or not anything is being typed. |
+| `elements(state)` | What this plugin offers a custom layout. Return `element(id, name, icon=, width=)` entries. |
+| `draw(id, state)` | One element's face, as a node tree. `sparkline(values, min=, max=, fill=)` is the node built for a key. |
 
 Every hook gets `state` last and may return it changed. State is kept between calls and between the app and the keyboard.
 
-On top of the panel commands (`insert`, `replace`, `haptic`, ...) a plugin has `space_text(text)` to caption the space bar, `claim("spacebar.text")` and `release(...)` to take over or hand back a native control, `stats()` for the live typing rate and totals, and `setting(name)` to read a few settings.
+On top of the panel commands (`insert`, `replace`, `haptic`, ...) a plugin has:
+
+- `space_text(text)` to caption the space bar (32 characters, `None` hands it back).
+- `setting(name)` and `set_setting(name, value)` to read and change about a hundred of Clink's own settings, from `sound.enabled` to `theme` and `layout.one_handed`. Values are checked against the same ranges the app's controls use.
+- `claim(id)` and `release(id)` to take over one of those settings. Its card in the app says which plugin manages it, and the space bar caption field locks while claimed.
+- `suggest(words)` to put up to ten words in the suggestion bar, and `banner(text)` for a short message over it.
+- `stats()` for the live typing rate and totals.
+
+In the app, Home > More > Developer lists every id with what it accepts, and Show ids badges each settings card with the anchor `section(...)` takes.
 
 The full reference is at [clinkkeys.app/docs/plugins](https://clinkkeys.app/docs/plugins/).
 

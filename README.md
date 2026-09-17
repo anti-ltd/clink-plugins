@@ -17,8 +17,10 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Plugin | What it does |
 |---|---|
 | WPM Spacebar | Puts your live typing speed on the space bar. Its switch sits under Keys > Space bar in the app. |
+| WPM Sparkline | A graph of the last half minute of your typing speed, as a layout element. |
+| Clock | The time, with or without the date, as a layout element. |
 
-The files live in [`Plugins/`](Plugins). Each one is a small JSON file with the script inside, readable in one sitting.
+The files live in [`Plugins/`](Plugins). Each one is a small JSON file with the script inside, readable in one sitting. A plugin that offers a layout element is added from Layout > Arrange > Element in the app, not from a settings screen.
 
 ## What a plugin can do
 

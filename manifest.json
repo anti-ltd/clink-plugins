@@ -2,14 +2,25 @@
   "version": "latest",
   "plugins": [
     {
+      "id": "clock",
+      "name": "Clock",
+      "version": "1.0",
+      "asset": {
+        "path": "clock.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/clock.clinkplugin",
+        "sha256": "6969434a219c9b5e326384284c668863b59701cb1fa062f934c00fed2e6a10f1",
+        "byteCount": 1295
+      }
+    },
+    {
       "id": "wpm-spacebar",
       "name": "WPM Spacebar",
-      "version": "1.2",
+      "version": "1.3",
       "asset": {
         "path": "wpm-spacebar.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-spacebar.clinkplugin",
-        "sha256": "d2b15894a05489c28a37166c8c0141b6fcf32e8aed2b251bec47195c8d214f07",
-        "byteCount": 1577
+        "sha256": "8422cdb35aac0a48e228a18d504698900014914c511c3dba732f06a840593862",
+        "byteCount": 1648
       }
     },
     {

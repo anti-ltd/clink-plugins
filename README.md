@@ -30,9 +30,21 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Adaptive Hitbox | Learns where you actually tap each key and moves its target toward it. Its switch sits under Keys > Hitboxes. |
 | Shorthand | Suggests "be right back" while you type brb (and a few more), can expand them on space, and keeps autocorrect off words in capitals and words with digits. |
 | Switch Volume | A knob for the top bar that sets how loud your key presses are. Drag it and each step clicks at the new level. Add it from Layout > Top bar. |
-| Typewriter | Two typewriter key styles for the theme editor (a chamfered office-machine cap and a round key in a chrome ring), a deep Typebar press, a Strike letter animation, and clacky haptics with a heavy return. The haptics switch sits under Sound & Haptics. |
+| Typewriter | Two themes for the Plugins tab of the theme gallery, Typewriter Ivory and Typewriter Noir, with round glass keys in chrome rings and a typewriter face. The key finish on its own for any theme, a deep Typebar press, a Strike letter animation, and clacky haptics with a heavy return. The haptics switch sits under Sound & Haptics. |
 
-The files live in [`Plugins/`](Plugins). Each one is a small JSON file with the script inside, readable in one sitting. A plugin that offers a layout element is added from Layout > Arrange > Element in the app, not from a settings screen, and one that offers a top bar button or knob is added from Layout > Top bar.
+The files live in [`Plugins/`](Plugins). Each one is an ordinary Python file, readable in one sitting, that starts with a short header:
+
+```python
+# ---
+# name: Clock
+# icon: clock
+# summary: The time on a key, for a custom layout
+# version: 1.1
+# author: Clink
+# ---
+```
+
+The file name is the plugin's id, and everything after the header is its script. `tools/build-manifest.py` packs each one into the `.clinkplugin` file Clink downloads, in `build/`. A plugin that offers a layout element is added from Layout > Arrange > Element in the app, not from a settings screen, and one that offers a top bar button or knob is added from Layout > Top bar.
 
 ## What a plugin can do
 
@@ -57,6 +69,7 @@ A plugin script may define any of these functions:
 | `draw(id, options, state)` | The same, for an element with options: `options` holds what was picked on that key. |
 | `effects(state)` | Lighting effects this plugin offers the Effects page. Return `light_effect(...)` entries; see Lighting effects below. |
 | `key_styles(state)` | Key styles for the theme editor. Return `key_style(...)` entries; see Looks below. |
+| `themes(state)` | Whole themes for the Plugins tab of the theme gallery. Return `theme(...)` entries. |
 | `popups(state)` | Key popup styles. Return `popup_style(...)` entries. |
 | `animations(state)` | Any mix of `entrance(...)`, `press_animation(...)`, `letter_animation(...)` and `transition(...)`. |
 | `backgrounds(state)` | Animated backgrounds. Return `background(...)` entries made of `particles(...)` layers. |
@@ -134,7 +147,8 @@ per frame: a look is only numbers and words.
 
 | Builder | Where it shows | Keywords |
 |---|---|---|
-| `key_style(id, name)` | Theme editor, Style card. Applied to the theme being edited. | `material` (`solid`, `empty`, `metal`, `3d`, `classic`, `slab`, `gamepad`, `liquidIce`, `molten`, `eink`), `variant` (`retro`, `modern`, `mechanical`, `mechanicalSwitches`, `berry`), `shape` (`rect`, `fret`, `berry`, `bevel`, `dome`), `glass`, `fan`, `inner_radius`, `face_inset`, `edges`, `raised`, `light_angle`, `shadow` (0 is flat), `shadow_radius`, `shadow_y`, `outline`, `outline_opacity` |
+| `key_style(id, name)` | Theme editor, Style card. Applied to the theme being edited. | `material` (`solid`, `empty`, `metal`, `3d`, `classic`, `slab`, `gamepad`, `liquidIce`, `molten`, `eink`, `typewriter`), `variant` (`retro`, `modern`, `mechanical`, `mechanicalSwitches`, `berry`), `shape` (`rect`, `fret`, `berry`, `bevel`, `dome`), `glass`, `fan`, `inner_radius`, `face_inset`, `edges`, `raised`, `light_angle`, `shadow` (0 is flat), `shadow_radius`, `shadow_y`, `outline`, `outline_opacity` |
+| `theme(id, name)` | Themes, Plugins tab. Installed as a theme of your own when picked. | `background`, `keys` and `key_text` (required), `background_bottom` to fade the background, `special`, `special_text`, `accent`, all `"#rrggbb"`; `dark`; `font` (`default`, `rounded`, `serif`, `monospaced`, `avenir`, `georgia`, `futura`, `typewriter`, `copperplate`, `chalkboard`, `marker`, `script`); `weight` (`thin` to `black`); `style`, a `key_style(...)` for the finish |
 | `popup_style(id, name)` | Look > Popups | `shape` (`tile`, `round`, `balloon`), `width`, `height`, `lift`, `font_size`, `corner`, `opacity`, `response`, `damping` |
 | `entrance(id, name)` | Look > Entrance | Where the keyboard starts: `opacity`, `x`, `y`, `scale`, `tilt`, `spin`, plus `anchor` (`bottom`, `center`, `top`), `response`, `damping` |
 | `press_animation(id, name)` | Look > Reactions > Geometry | A held key: `scale` or `scale_x` and `scale_y`, `x`, `y`, `rotation`, `response`, `damping` |
@@ -215,9 +229,9 @@ The full reference is at [clinkkeys.app/docs/plugins](https://clinkkeys.app/docs
 ## Make your first plugin
 
 1. Fork this repository.
-2. Copy a file in [`Plugins/`](Plugins), rename it, and change its `id`, `name`, `summary` and `version`.
-3. Test it in Clink by importing the file before publishing. The in-app editor has a preview that fires each hook.
-4. Run `python3 tools/build-manifest.py`.
+2. Copy a file in [`Plugins/`](Plugins), rename it (the name is the id), and change the `name`, `summary` and `version` in its header.
+3. Run `python3 tools/build-manifest.py`. It packs your plugin into `build/<id>.clinkplugin`, or says which header line is wrong.
+4. Test it in Clink by importing that file before publishing. The in-app editor has a preview that fires each hook.
 5. Push to `main`. GitHub Actions publishes the plugins and manifest to the `latest` release.
 
 ## Add your repository to Clink

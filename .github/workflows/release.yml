@@ -12,5 +12,5 @@ jobs:
       - run: python3 tools/build-manifest.py
       - run: gh release delete latest --yes || true
         env: { GH_TOKEN: "${{ github.token }}" }
-      - run: gh release create latest Plugins/*.clinkplugin manifest.json --title "Latest plugins" --latest
+      - run: gh release create latest build/*.clinkplugin manifest.json --title "Latest plugins" --latest
         env: { GH_TOKEN: "${{ github.token }}" }

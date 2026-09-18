@@ -62,7 +62,7 @@
       "asset": {
         "path": "flick-gestures.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/flick-gestures.clinkplugin",
-        "sha256": "51e3071f9dc4f90458f87de0581aebed8197c726ed14d42219f5b49b7e62c77f",
+        "sha256": "f5670dee7c8e13e6bc3032e8e368f477c96958fa2cf2ea55ae9528c38fa1579e",
         "byteCount": 3772
       }
     },
@@ -160,14 +160,14 @@
     {
       "id": "typewriter",
       "name": "Typewriter",
-      "version": "1.0",
+      "version": "2.0",
       "icon": "keyboard.badge.ellipsis",
-      "summary": "Typewriter key caps, a typebar press and clacky haptics",
+      "summary": "Typewriter keys, a light and a dark theme, a typebar press and clacky haptics",
       "asset": {
         "path": "typewriter.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/typewriter.clinkplugin",
-        "sha256": "b9de9ee6d79c0d8dec38f68a2762a0735921308d182c3482149c2280f9f0d684",
-        "byteCount": 2631
+        "sha256": "285ba1f89ca92e5a5f856e31702ea54a24294bf848aa2bc8eae232c59e8484f4",
+        "byteCount": 3186
       }
     },
     {
@@ -179,7 +179,7 @@
       "asset": {
         "path": "wpm-spacebar.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-spacebar.clinkplugin",
-        "sha256": "8422cdb35aac0a48e228a18d504698900014914c511c3dba732f06a840593862",
+        "sha256": "7a87fe3e8c1c07c529c3166e69d370a1a6b07882378c2091806ca426c1702bc5",
         "byteCount": 1648
       }
     },

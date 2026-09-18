@@ -1,0 +1,10 @@
+{
+  "author": "Clink",
+  "enabled": true,
+  "icon": "hand.draw",
+  "id": "flick-gestures",
+  "name": "Flick Gestures",
+  "source": "# Flick sideways anywhere on the letters: left deletes the last word, right\n# types a space. Swipe typing reads the same drag as a word, so the switch\n# turns swipe typing off while it is on and puts it back afterwards.\n#\n# The switch sits under Gestures > Swipe typing in the app. The keyboard only\n# hands over flicks while swipe typing is off, and a flick this plugin does\n# nothing with (because the switch is off) stays an ordinary keystroke.\n\ndef initial():\n    return {\"on\": False, \"swipe_before\": False}\n\ndef settings(state):\n    return section(\"gestures.swipe\", [\n        toggle(\"Flick to delete and space\", state[\"on\"], action=\"toggle\"),\n        text(\"Flick left anywhere on the letters to delete a word, right for a space. Turns swipe typing off while it's on.\", size=12, color=\"gray\"),\n    ], title=\"Flick Gestures\")\n\ndef on_action(action, value, state):\n    if action == \"toggle\":\n        if value and not state[\"on\"]:\n            # Remember the person's own choice so turning this off restores it.\n            state[\"swipe_before\"] = setting(\"gestures.swipe\")\n            set_setting(\"gestures.swipe\", False)\n            claim(\"gestures.swipe\")\n        elif not value and state[\"on\"]:\n            release(\"gestures.swipe\")\n            set_setting(\"gestures.swipe\", state[\"swipe_before\"])\n        state[\"on\"] = value\n    return state\n\ndef on_swipe(direction, state):\n    if not state[\"on\"]:\n        return state\n    if direction == \"left\":\n        delete_word()\n    elif direction == \"right\":\n        # The space bar's own path, so the word before it still autocorrects.\n        press(\"space\")\n    return state\n",
+  "summary": "Flick left to delete a word, right for a space",
+  "version": "1.0"
+}

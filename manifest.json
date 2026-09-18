@@ -4,12 +4,23 @@
     {
       "id": "clock",
       "name": "Clock",
-      "version": "1.0",
+      "version": "1.1",
       "asset": {
         "path": "clock.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/clock.clinkplugin",
-        "sha256": "6969434a219c9b5e326384284c668863b59701cb1fa062f934c00fed2e6a10f1",
-        "byteCount": 1295
+        "sha256": "20c5abc943be16237e42feff157e95eb1edabaa62a98c454ce29aec4bec19390",
+        "byteCount": 1802
+      }
+    },
+    {
+      "id": "flick-gestures",
+      "name": "Flick Gestures",
+      "version": "1.0",
+      "asset": {
+        "path": "flick-gestures.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/flick-gestures.clinkplugin",
+        "sha256": "68b7e7055c847f94e5c5a9a184d7f51a326c2cab8888defe4f4b155ac92f62fd",
+        "byteCount": 1930
       }
     },
     {
@@ -26,12 +37,12 @@
     {
       "id": "wpm-sparkline",
       "name": "WPM Sparkline",
-      "version": "1.0",
+      "version": "1.4",
       "asset": {
         "path": "wpm-sparkline.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-sparkline.clinkplugin",
-        "sha256": "1eb7af2cc858dfcf69fb2697cc528dbb9425f25e6ba5d5a1ef582b50f2838523",
-        "byteCount": 1691
+        "sha256": "bd5ade56189006d001065f9a427d8e80c23f833c67a38f6177e23966582b124a",
+        "byteCount": 1853
       }
     }
   ]

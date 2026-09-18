@@ -15,12 +15,23 @@
     {
       "id": "flick-gestures",
       "name": "Flick Gestures",
-      "version": "1.0",
+      "version": "2.0",
       "asset": {
         "path": "flick-gestures.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/flick-gestures.clinkplugin",
-        "sha256": "68b7e7055c847f94e5c5a9a184d7f51a326c2cab8888defe4f4b155ac92f62fd",
-        "byteCount": 1930
+        "sha256": "51e3071f9dc4f90458f87de0581aebed8197c726ed14d42219f5b49b7e62c77f",
+        "byteCount": 3772
+      }
+    },
+    {
+      "id": "light-show",
+      "name": "Light Show",
+      "version": "1.0",
+      "asset": {
+        "path": "light-show.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/light-show.clinkplugin",
+        "sha256": "cbee94a8d0b973b92d802c235a1ceccd6cd5b121d0a2b46d68b4a23fdadb8f88",
+        "byteCount": 1712
       }
     },
     {

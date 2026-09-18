@@ -19,7 +19,8 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | WPM Spacebar | Puts your live typing speed on the space bar. Its switch sits under Keys > Space bar in the app. |
 | WPM Sparkline | A graph of the last half minute of your typing speed, as a layout element. |
 | Clock | The time, with or without the date, as a layout element. 12- or 24-hour is set per element. |
-| Flick Gestures | Flick left anywhere on the letters to delete a word, right for a space. Its switch sits under Gestures > Swipe typing, and it turns swipe typing off while it's on. |
+| Light Show | Two lighting effects for the Effects page: Aurora, a slow wave through greens and blues with a twinkle on top, and Tempo, a wave that speeds up as you type faster. |
+| Flick Gestures | Flicks anywhere on the letters, each with its own switch: left deletes a word, right types a space, up picks the middle suggestion and up-left or up-right the ones either side. The switches sit under Gestures > Swipe typing, and swipe typing is off while any of them is on. |
 
 The files live in [`Plugins/`](Plugins). Each one is a small JSON file with the script inside, readable in one sitting. A plugin that offers a layout element is added from Layout > Arrange > Element in the app, not from a settings screen.
 
@@ -40,10 +41,11 @@ A plugin script may define any of these functions:
 | `on_language(code, state)` | The typing language changed, for example to `"de"`. |
 | `on_field(kind, state)` | The keyboard moved to a different kind of field: `"default"`, `"email"`, `"url"`, `"number"`, `"phone"`, `"search"` or `"password"`. |
 | `on_tick(state)` | Once a second while the keyboard is on screen, whether or not anything is being typed. |
-| `on_swipe(direction, state)` | A sideways flick that started on a letter key, `"left"` or `"right"`. Only while swipe typing is off. |
+| `on_swipe(direction, state)` | A flick that started on a letter key: `"left"`, `"right"`, `"up"`, `"up_left"` or `"up_right"`. Only while swipe typing is off. |
 | `elements(state)` | What this plugin offers a custom layout. Return `element(id, name, icon=, width=, options=)` entries. |
 | `draw(id, state)` | One element's face, as a node tree. `sparkline(values, min=, max=, fill=)` is the node built for a key. |
 | `draw(id, options, state)` | The same, for an element with options: `options` holds what was picked on that key. |
+| `effects(state)` | Lighting effects this plugin offers the Effects page. Return `light_effect(...)` entries; see Lighting effects below. |
 
 An element can let each placed copy decide something for itself with
 `option(key, label, choices=["a", "b"])` or `option(key, label, default=False)`.
@@ -60,19 +62,68 @@ On top of the panel commands (`insert`, `replace`, `haptic`, ...) a plugin has:
 - `claim(id)` and `release(id)` to take over one of those settings. Its card in the app says which plugin manages it, and the space bar caption field locks while claimed.
 - `suggest(words)` to put up to ten words in the suggestion bar, and `banner(text)` for a short message over it.
 - `press(key)` to run the keyboard's own `"space"` or `"delete"` key. A pressed space autocorrects the word before it, which `insert(" ")` doesn't.
+- `pick_suggestion(slot)` to take the suggestion chip under the `"left"`, `"center"` or `"right"` third of the bar, exactly as a tap on it would.
 - `stats()` for the live typing rate and totals.
 
 In the app, Home > More > Developer lists every id with what it accepts, and Show ids badges each settings card with the anchor `section(...)` takes.
 
+### Lighting effects
+
+`effects(state)` returns lighting effects, which show up in the app under
+Effects > From plugins next to the built-in styles. Each is a stack of layers
+that apply top to bottom:
+
+```python
+def effects(state):
+    return [light_effect("tide", "Tide", colors=["#00e5ff", "#7c4dff"], layers=[
+        light_layer("solid", low=0.2, high=0.2),
+        light_layer("wave", moves="both", speed=0.8, size=1.5, direction="up"),
+    ])]
+```
+
+A layer's `pattern` is one of `solid`, `pulse`, `wave`, `gradient`, `twinkle`,
+`sweep`, `rain`, `flicker` or `checker`. The keywords, all optional:
+
+| Keyword | Values | Meaning |
+|---|---|---|
+| `moves` | `"light"`, `"color"`, `"both"` | What the pattern changes. Default `"light"`. |
+| `mix` | `"add"`, `"max"`, `"multiply"` | How its brightness meets the layers above. `"multiply"` masks. |
+| `shape` | `"smooth"`, `"ramp"`, `"step"`, `"spike"` | The rise and fall of pulse, wave and gradient. |
+| `direction` | `"right"`, `"left"`, `"down"`, `"up"`, `"out"` | Which way wave, gradient, sweep and rain travel. |
+| `speed` | 0 to 4 | 0 holds it still. |
+| `size` | 0.25 to 4 | How many times it repeats across the board (for twinkle, how many keys are lit). |
+| `low`, `high` | 0 to 1 | The brightness it runs between. |
+| `color_span`, `color_offset` | 0 to 1 | How far along the colors it moves, and where it starts. |
+
+`colors` takes up to eight `"#rrggbb"` strings that the color loops through.
+Leave it out and the effect uses the person's own Color setting. The person can
+also hold an effect and choose Duplicate to get an editable copy of their own.
+
+While a plugin's effect is running and the keyboard is up, `effects(state)`
+runs again about once a second, so an effect can follow the state or `stats()`.
+Change as little as you can each time: round a typing rate rather than passing
+it straight through, or the effect is replaced every second for nothing.
+
 ### Flicks
 
-`on_swipe` gets a drag across the letters that is clearly sideways and longer
-than a key or so. Swipe typing reads the same drag as a word, so flicks only
-arrive while swipe typing is off; a plugin built on them should turn it off
-with `set_setting("gestures.swipe", False)` and put the person's own value back
-when it's switched off. The drag has to start on a letter: the space bar,
-delete, the number and symbol pages and a custom key's own swipe faces keep
-their gestures.
+`on_swipe` gets a drag that starts on a letter and travels more than a key or
+so. Its angle decides the direction: a 60 degree cone each for `"left"`,
+`"right"` and `"up"`, and the 30 degrees between up and either side for
+`"up_left"` and `"up_right"`. Anything leaning downward is never a flick,
+since down is the quick accent. Swipe typing reads the same drags as words,
+so flicks only arrive while swipe typing is off; a plugin built on them should
+turn it off with `set_setting("gestures.swipe", False)` and put the person's
+own value back when it's switched off. Predictive Flick owns upward flicks on
+the keys showing its words, so a plugin that uses `"up"` should turn
+`gestures.predictive_flick` off the same way. The space bar, delete, the
+number and symbol pages and a custom key's own swipe faces keep their
+gestures.
+
+`pick_suggestion` goes by what is on screen. With scrollable suggestions it
+takes the chip under that third of the bar wherever the bar is scrolled, and
+a third with no chip in it picks nothing. Inside `on_swipe` it picks from the
+bar as it was when the finger landed, before the flick's own letter changed
+it.
 
 The finger that starts a flick types its letter when it lands, like any tap.
 If a plugin asks for anything in `on_swipe`, the keyboard takes that letter

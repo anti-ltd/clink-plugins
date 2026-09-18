@@ -145,6 +145,19 @@
       }
     },
     {
+      "id": "switch-volume",
+      "name": "Switch Volume",
+      "version": "1.0",
+      "icon": "speaker.wave.2.fill",
+      "summary": "A knob in the top bar that sets how loud your key presses are",
+      "asset": {
+        "path": "switch-volume.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/switch-volume.clinkplugin",
+        "sha256": "00173fa423a8c7dfd79e7bfe35c15a69ba79899a0c431a9b98a31b5150a7e798",
+        "byteCount": 1311
+      }
+    },
+    {
       "id": "wpm-spacebar",
       "name": "WPM Spacebar",
       "version": "1.3",

@@ -29,8 +29,9 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Heavy Space | A heavier haptic on the space bar, a crisp one on return and a light one on delete. Its switch sits under Sound & Haptics. |
 | Adaptive Hitbox | Learns where you actually tap each key and moves its target toward it. Its switch sits under Keys > Hitboxes. |
 | Shorthand | Suggests "be right back" while you type brb (and a few more), can expand them on space, and keeps autocorrect off words in capitals and words with digits. |
+| Switch Volume | A knob for the top bar that sets how loud your key presses are. Drag it and each step clicks at the new level. Add it from Layout > Top bar. |
 
-The files live in [`Plugins/`](Plugins). Each one is a small JSON file with the script inside, readable in one sitting. A plugin that offers a layout element is added from Layout > Arrange > Element in the app, not from a settings screen.
+The files live in [`Plugins/`](Plugins). Each one is a small JSON file with the script inside, readable in one sitting. A plugin that offers a layout element is added from Layout > Arrange > Element in the app, not from a settings screen, and one that offers a top bar button or knob is added from Layout > Top bar.
 
 ## What a plugin can do
 
@@ -64,6 +65,7 @@ A plugin script may define any of these functions:
 | `on_touch(key, x, y, state)` | After every tap: which key it went to and where on the key the finger landed. |
 | `suggestions(word, state)` | Words for the suggestion bar while `word` is being typed. |
 | `correct(word, fix, state)` | Space ended `word`. Return the word to commit, `False` to keep it as typed, or `None` for the keyboard's own `fix`. |
+| `bar_items(state)` | Buttons and knobs this plugin offers the top bar. Return `bar_button(...)` and `bar_knob(...)` entries; see Top bar below. |
 
 An element can let each placed copy decide something for itself with
 `option(key, label, choices=["a", "b"])` or `option(key, label, default=False)`.
@@ -161,6 +163,21 @@ tap has been handled.
 every key, and its words lead the bar. `correct(word, fix, state)` runs once
 per word when space ends it, even with autocorrect off, and never in a
 password field. The first plugin to answer something other than `None` wins.
+
+### Top bar
+
+`bar_items(state)` offers things someone can place in the bar above the keys,
+from Layout > Top bar (a Pro feature). `bar_button(id, name, icon=, title=)` is
+a tap target: `icon` is an SF Symbol and `title` is up to 12 characters drawn
+beside it. `bar_knob(id, name, icon=, min=, max=, step=, value=, setting=)` is
+a dial you drag up or right to turn up. A tap, or a knob let go, calls
+`on_action(id, value, state)`: `value` is `None` for a button and the number
+for a knob. Give a knob `setting=` (any number control, like `"sound.volume"`)
+and it reads and writes that setting itself, with its range, so `min`, `max`,
+`step` and `value` aren't needed; each step also plays a key click at the new
+level. Without `setting=` the knob shows `value` and the plugin keeps it in its
+state. `bar_items` is read when the keyboard opens and again on the tick, so
+keep it as cheap as `draw`.
 
 ### Flicks
 

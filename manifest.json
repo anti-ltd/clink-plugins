@@ -5,6 +5,8 @@
       "id": "adaptive-hitbox",
       "name": "Adaptive Hitbox",
       "version": "1.0",
+      "icon": "scope",
+      "summary": "Moves each key's target toward where you actually tap it",
       "asset": {
         "path": "adaptive-hitbox.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/adaptive-hitbox.clinkplugin",
@@ -16,6 +18,8 @@
       "id": "bubble-popups",
       "name": "Bubble Popups",
       "version": "1.0",
+      "icon": "bubble.fill",
+      "summary": "A round popup that floats a little higher",
       "asset": {
         "path": "bubble-popups.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/bubble-popups.clinkplugin",
@@ -27,6 +31,8 @@
       "id": "clock",
       "name": "Clock",
       "version": "1.1",
+      "icon": "clock",
+      "summary": "The time on a key, for a custom layout",
       "asset": {
         "path": "clock.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/clock.clinkplugin",
@@ -38,6 +44,8 @@
       "id": "colemak-dh",
       "name": "Colemak-DH",
       "version": "1.0",
+      "icon": "keyboard",
+      "summary": "The Colemak-DH layout, installed as a custom layout",
       "asset": {
         "path": "colemak-dh.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/colemak-dh.clinkplugin",
@@ -49,6 +57,8 @@
       "id": "flick-gestures",
       "name": "Flick Gestures",
       "version": "2.0",
+      "icon": "hand.draw",
+      "summary": "Flick to delete a word, type a space or pick a suggestion",
       "asset": {
         "path": "flick-gestures.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/flick-gestures.clinkplugin",
@@ -60,6 +70,8 @@
       "id": "heavy-space",
       "name": "Heavy Space",
       "version": "1.0",
+      "icon": "iphone.radiowaves.left.and.right",
+      "summary": "A heavier haptic on space, and its own feel for return and delete",
       "asset": {
         "path": "heavy-space.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/heavy-space.clinkplugin",
@@ -71,6 +83,8 @@
       "id": "light-show",
       "name": "Light Show",
       "version": "1.0",
+      "icon": "light.max",
+      "summary": "Two lighting effects for the Effects page",
       "asset": {
         "path": "light-show.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/light-show.clinkplugin",
@@ -82,17 +96,21 @@
       "id": "low-profile",
       "name": "Low Profile",
       "version": "1.0",
+      "icon": "square.stack.3d.up",
+      "summary": "A low-profile mechanical key style for the theme editor",
       "asset": {
         "path": "low-profile.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/low-profile.clinkplugin",
-        "sha256": "027c2905c0a168b2d5340cedb2f64daf2c9911a191f352e7be6bc95c68a5764a",
-        "byteCount": 1083
+        "sha256": "ba6bb9a1c782cc4f78d824e346b787a52b84e39afa075d869cbe8dfd663faf89",
+        "byteCount": 1093
       }
     },
     {
       "id": "motion-kit",
       "name": "Motion Kit",
       "version": "1.0",
+      "icon": "wand.and.rays",
+      "summary": "An entrance, a key press, a letter bounce and a page switch",
       "asset": {
         "path": "motion-kit.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/motion-kit.clinkplugin",
@@ -104,6 +122,8 @@
       "id": "shorthand",
       "name": "Shorthand",
       "version": "1.0",
+      "icon": "text.badge.plus",
+      "summary": "Suggests and expands shorthand, and keeps autocorrect off capitals and numbers",
       "asset": {
         "path": "shorthand.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/shorthand.clinkplugin",
@@ -115,6 +135,8 @@
       "id": "snowfall",
       "name": "Snowfall",
       "version": "1.0",
+      "icon": "snowflake",
+      "summary": "Snow drifting behind the keys, with a puff from every key you press",
       "asset": {
         "path": "snowfall.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/snowfall.clinkplugin",
@@ -126,6 +148,8 @@
       "id": "wpm-spacebar",
       "name": "WPM Spacebar",
       "version": "1.3",
+      "icon": "speedometer",
+      "summary": "Show your typing speed on the space bar",
       "asset": {
         "path": "wpm-spacebar.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-spacebar.clinkplugin",
@@ -137,6 +161,8 @@
       "id": "wpm-sparkline",
       "name": "WPM Sparkline",
       "version": "1.4",
+      "icon": "waveform.path.ecg",
+      "summary": "A live graph of your typing speed, as a layout element",
       "asset": {
         "path": "wpm-sparkline.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-sparkline.clinkplugin",

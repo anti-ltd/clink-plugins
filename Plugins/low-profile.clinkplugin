@@ -1,7 +1,7 @@
 {
   "id": "low-profile",
   "name": "Low Profile",
-  "icon": "keyboard",
+  "icon": "square.stack.3d.up",
   "summary": "A low-profile mechanical key style for the theme editor",
   "version": "1.0",
   "author": "Clink",

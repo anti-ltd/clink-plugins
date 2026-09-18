@@ -21,6 +21,14 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Clock | The time, with or without the date, as a layout element. 12- or 24-hour is set per element. |
 | Light Show | Two lighting effects for the Effects page: Aurora, a slow wave through greens and blues with a twinkle on top, and Tempo, a wave that speeds up as you type faster. |
 | Flick Gestures | Flicks anywhere on the letters, each with its own switch: left deletes a word, right types a space, up picks the middle suggestion and up-left or up-right the ones either side. The switches sit under Gestures > Swipe typing, and swipe typing is off while any of them is on. |
+| Low Profile | A key style: the 3D mechanical cap pressed flat, with sharp walls and a small foot. Apply it to any theme from the theme editor's Style card. |
+| Bubble Popups | A round key popup that floats a little higher than the built-in one and springs in. |
+| Motion Kit | One of each animation: Swoop (entrance), Dip (key press), Bounce (letters) and Glide (switching between letters, 123 and #+=). |
+| Snowfall | An animated background: snow drifting behind the keys, with a puff of light from every key you press. |
+| Colemak-DH | The Colemak-DH layout, installed as an ordinary custom layout you can edit. |
+| Heavy Space | A heavier haptic on the space bar, a crisp one on return and a light one on delete. Its switch sits under Sound & Haptics. |
+| Adaptive Hitbox | Learns where you actually tap each key and moves its target toward it. Its switch sits under Keys > Hitboxes. |
+| Shorthand | Suggests "be right back" while you type brb (and a few more), can expand them on space, and keeps autocorrect off words in capitals and words with digits. |
 
 The files live in [`Plugins/`](Plugins). Each one is a small JSON file with the script inside, readable in one sitting. A plugin that offers a layout element is added from Layout > Arrange > Element in the app, not from a settings screen.
 
@@ -46,6 +54,16 @@ A plugin script may define any of these functions:
 | `draw(id, state)` | One element's face, as a node tree. `sparkline(values, min=, max=, fill=)` is the node built for a key. |
 | `draw(id, options, state)` | The same, for an element with options: `options` holds what was picked on that key. |
 | `effects(state)` | Lighting effects this plugin offers the Effects page. Return `light_effect(...)` entries; see Lighting effects below. |
+| `key_styles(state)` | Key styles for the theme editor. Return `key_style(...)` entries; see Looks below. |
+| `popups(state)` | Key popup styles. Return `popup_style(...)` entries. |
+| `animations(state)` | Any mix of `entrance(...)`, `press_animation(...)`, `letter_animation(...)` and `transition(...)`. |
+| `backgrounds(state)` | Animated backgrounds. Return `background(...)` entries made of `particles(...)` layers. |
+| `layouts(state)` | Keyboard layouts. Return `layout(...)` entries. |
+| `haptics(state)` | A haptic per key, as a dict: `{"space": "heavy"}`. See Typing below. |
+| `hitboxes(state)` | A hit area per key, as a dict: `{"a": hitbox(x=-0.1)}`. |
+| `on_touch(key, x, y, state)` | After every tap: which key it went to and where on the key the finger landed. |
+| `suggestions(word, state)` | Words for the suggestion bar while `word` is being typed. |
+| `correct(word, fix, state)` | Space ended `word`. Return the word to commit, `False` to keep it as typed, or `None` for the keyboard's own `fix`. |
 
 An element can let each placed copy decide something for itself with
 `option(key, label, choices=["a", "b"])` or `option(key, label, default=False)`.
@@ -103,6 +121,46 @@ While a plugin's effect is running and the keyboard is up, `effects(state)`
 runs again about once a second, so an effect can follow the state or `stats()`.
 Change as little as you can each time: round a typing rate rather than passing
 it straight through, or the effect is replaced every second for nothing.
+
+### Looks
+
+The look hooks hand the app things to pick, each one shown under From plugins
+next to the built-in choices. Picking one copies it into your settings, so it
+keeps working with the plugin switched off or removed. The script is never run
+per frame: a look is only numbers and words.
+
+| Builder | Where it shows | Keywords |
+|---|---|---|
+| `key_style(id, name)` | Theme editor, Style card. Applied to the theme being edited. | `material` (`solid`, `empty`, `metal`, `3d`, `classic`, `slab`, `gamepad`, `liquidIce`, `molten`, `eink`), `variant` (`retro`, `modern`, `mechanical`, `mechanicalSwitches`, `berry`), `shape` (`rect`, `fret`, `berry`, `bevel`, `dome`), `glass`, `fan`, `inner_radius`, `face_inset`, `edges`, `raised`, `light_angle`, `shadow` (0 is flat), `shadow_radius`, `shadow_y`, `outline`, `outline_opacity` |
+| `popup_style(id, name)` | Look > Popups | `shape` (`tile`, `round`, `balloon`), `width`, `height`, `lift`, `font_size`, `corner`, `opacity`, `response`, `damping` |
+| `entrance(id, name)` | Look > Entrance | Where the keyboard starts: `opacity`, `x`, `y`, `scale`, `tilt`, `spin`, plus `anchor` (`bottom`, `center`, `top`), `response`, `damping` |
+| `press_animation(id, name)` | Look > Reactions > Geometry | A held key: `scale` or `scale_x` and `scale_y`, `x`, `y`, `rotation`, `response`, `damping` |
+| `letter_animation(id, name)` | Look > Reactions > Letters | A letter at the peak of its tap: `scale` or `scale_x` and `scale_y`, `x`, `y`, `rotation`, `anchor` |
+| `transition(id, name)` | Look > Transition | How far the old keys leave: `x` and `y` as a share of the keyboard, `scale`, `tilt`, `fade`, `duration` |
+| `background(id, name, layers=[...], colors=[...])` | Look > Background | Up to four `particles(...)` layers: `shape` (`dot`, `glow`, `streak`, `ring`, `square`), `count`, `size`, `size_range`, `speed`, `direction` (`none`, `up`, `down`, `left`, `right`), `spread`, `gravity`, `wobble`, `life`, `twinkle`, `opacity`, `color`, `burst`, `burst_speed` |
+| `layout(id, name, rows=[...])` | Layout > Arrangement. Installed as a custom layout. | Rows of keys: a string is a letter, `layout_key(glyph, action=, width=)` anything else. `left=[...]` and `right=[...]` put keys beside the space bar. |
+
+Every look also takes `icon=` for its tile. A misspelt keyword, a word outside
+its list or a string where a number goes is an error in the editor console,
+and numbers are held to the same ranges the app's own controls use.
+
+### Typing
+
+`haptics(state)` and `hitboxes(state)` return tables keyed by key name: the
+letter itself (`"a"`), `"space"`, `"delete"`, `"return"`, `"shift"`,
+`"globe"`, `"letters"` for any letter the table doesn't name, and `"keys"` for
+anything else. A haptic is a style (`"soft"`, `"light"`, `"medium"`,
+`"heavy"`, `"rigid"`, `"off"`) or `feel(style, intensity=, sharpness=)`. A
+hitbox is `hitbox(scale=, x=, y=)`: `x` and `y` move the key's target by that
+share of its size (half a key at most) and `scale` grows or shrinks it. Both
+tables are read when the keyboard opens and once a second after that, so
+nothing runs per keystroke for them. `on_touch` does run per tap, after the
+tap has been handled.
+
+`suggestions(word, state)` runs each time the suggestion bar settles, not on
+every key, and its words lead the bar. `correct(word, fix, state)` runs once
+per word when space ends it, even with autocorrect off, and never in a
+password field. The first plugin to answer something other than `None` wins.
 
 ### Flicks
 

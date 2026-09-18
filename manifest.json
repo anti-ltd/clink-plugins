@@ -2,6 +2,28 @@
   "version": "latest",
   "plugins": [
     {
+      "id": "adaptive-hitbox",
+      "name": "Adaptive Hitbox",
+      "version": "1.0",
+      "asset": {
+        "path": "adaptive-hitbox.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/adaptive-hitbox.clinkplugin",
+        "sha256": "830c58b58ede313f0603415f5a039e376dfdae22038e75e390651fd7d4416e3d",
+        "byteCount": 2822
+      }
+    },
+    {
+      "id": "bubble-popups",
+      "name": "Bubble Popups",
+      "version": "1.0",
+      "asset": {
+        "path": "bubble-popups.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/bubble-popups.clinkplugin",
+        "sha256": "134353c1a758a7b9ea9dcf089707c8422ebcbca3cbd34c8958f6c98c71812df8",
+        "byteCount": 974
+      }
+    },
+    {
       "id": "clock",
       "name": "Clock",
       "version": "1.1",
@@ -10,6 +32,17 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/clock.clinkplugin",
         "sha256": "20c5abc943be16237e42feff157e95eb1edabaa62a98c454ce29aec4bec19390",
         "byteCount": 1802
+      }
+    },
+    {
+      "id": "colemak-dh",
+      "name": "Colemak-DH",
+      "version": "1.0",
+      "asset": {
+        "path": "colemak-dh.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/colemak-dh.clinkplugin",
+        "sha256": "818c6a6f8811c54b750f4cac822f57c4cc18a44392eecec2718a3d82b34ab776",
+        "byteCount": 1148
       }
     },
     {
@@ -24,6 +57,17 @@
       }
     },
     {
+      "id": "heavy-space",
+      "name": "Heavy Space",
+      "version": "1.0",
+      "asset": {
+        "path": "heavy-space.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/heavy-space.clinkplugin",
+        "sha256": "14ef0c65cee320e5de40592309f8be377cdec6428a6ae6abfdd63440ad601fb7",
+        "byteCount": 1568
+      }
+    },
+    {
       "id": "light-show",
       "name": "Light Show",
       "version": "1.0",
@@ -32,6 +76,50 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/light-show.clinkplugin",
         "sha256": "cbee94a8d0b973b92d802c235a1ceccd6cd5b121d0a2b46d68b4a23fdadb8f88",
         "byteCount": 1712
+      }
+    },
+    {
+      "id": "low-profile",
+      "name": "Low Profile",
+      "version": "1.0",
+      "asset": {
+        "path": "low-profile.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/low-profile.clinkplugin",
+        "sha256": "027c2905c0a168b2d5340cedb2f64daf2c9911a191f352e7be6bc95c68a5764a",
+        "byteCount": 1083
+      }
+    },
+    {
+      "id": "motion-kit",
+      "name": "Motion Kit",
+      "version": "1.0",
+      "asset": {
+        "path": "motion-kit.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/motion-kit.clinkplugin",
+        "sha256": "ec4b8d0b6089b004d531708ec0ba563cf68130f6e65b00a588f86ac72968ea4c",
+        "byteCount": 1821
+      }
+    },
+    {
+      "id": "shorthand",
+      "name": "Shorthand",
+      "version": "1.0",
+      "asset": {
+        "path": "shorthand.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/shorthand.clinkplugin",
+        "sha256": "2481d060ad955b2a54aad67482a1c9a5cb44c1132b3c4eaee0ad5da32b1fabbf",
+        "byteCount": 2097
+      }
+    },
+    {
+      "id": "snowfall",
+      "name": "Snowfall",
+      "version": "1.0",
+      "asset": {
+        "path": "snowfall.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/snowfall.clinkplugin",
+        "sha256": "d01e714f6aefad56823ac870d5ea111c8085d336d3fabe6eaa9e1ea6cd8e7053",
+        "byteCount": 1780
       }
     },
     {

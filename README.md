@@ -30,6 +30,7 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Adaptive Hitbox | Learns where you actually tap each key and moves its target toward it. Its switch sits under Keys > Hitboxes. |
 | Shorthand | Suggests "be right back" while you type brb (and a few more), can expand them on space, and keeps autocorrect off words in capitals and words with digits. |
 | Switch Volume | A knob for the top bar that sets how loud your key presses are. Drag it and each step clicks at the new level. Add it from Layout > Top bar. |
+| Typewriter | Two typewriter key styles for the theme editor (a chamfered office-machine cap and a round key in a chrome ring), a deep Typebar press, a Strike letter animation, and clacky haptics with a heavy return. The haptics switch sits under Sound & Haptics. |
 
 The files live in [`Plugins/`](Plugins). Each one is a small JSON file with the script inside, readable in one sitting. A plugin that offers a layout element is added from Layout > Arrange > Element in the app, not from a settings screen, and one that offers a top bar button or knob is added from Layout > Top bar.
 
@@ -176,8 +177,9 @@ for a knob. Give a knob `setting=` (any number control, like `"sound.volume"`)
 and it reads and writes that setting itself, with its range, so `min`, `max`,
 `step` and `value` aren't needed; each step also plays a key click at the new
 level. Without `setting=` the knob shows `value` and the plugin keeps it in its
-state. `bar_items` is read when the keyboard opens and again on the tick, so
-keep it as cheap as `draw`.
+state. Whoever places a knob picks how it's drawn in the builder: a ring, or
+the mechanical knob the Tools button uses. `bar_items` is read when the
+keyboard opens and again on the tick, so keep it as cheap as `draw`.
 
 ### Flicks
 

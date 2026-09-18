@@ -158,6 +158,19 @@
       }
     },
     {
+      "id": "typewriter",
+      "name": "Typewriter",
+      "version": "1.0",
+      "icon": "keyboard.badge.ellipsis",
+      "summary": "Typewriter key caps, a typebar press and clacky haptics",
+      "asset": {
+        "path": "typewriter.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/typewriter.clinkplugin",
+        "sha256": "b9de9ee6d79c0d8dec38f68a2762a0735921308d182c3482149c2280f9f0d684",
+        "byteCount": 2631
+      }
+    },
+    {
       "id": "wpm-spacebar",
       "name": "WPM Spacebar",
       "version": "1.3",

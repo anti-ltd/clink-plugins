@@ -21,7 +21,8 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Clock | The time, with or without the date, as a layout element. 12- or 24-hour is set per element. |
 | Light Show | Two lighting effects for the Effects page: Aurora, a slow wave through greens and blues with a twinkle on top, and Tempo, a wave that speeds up as you type faster. |
 | Flick Gestures | Flicks anywhere on the letters, each with its own switch: left deletes a word, right types a space, up picks the middle suggestion and up-left or up-right the ones either side. The switches sit under Gestures > Swipe typing, and swipe typing is off while any of them is on. |
-| Low Profile | A key style: the 3D mechanical cap pressed flat, with sharp walls and a small foot. Apply it to any theme from the theme editor's Style card. |
+| Low Profile | A key drawn entirely in Python: shallow side walls, a narrow bevel, a dished face and a small fixed foot, with short press travel. Apply it to any theme from the theme editor's Style card. |
+| Low Profile Mod | An example that modifies the built-in 3D mechanical style: tighter corners, an inset face, raised edges and angled lighting. Compare its settings with Low Profile's Python drawing layers. |
 | Bubble Popups | A round key popup that floats a little higher than the built-in one and springs in. |
 | Motion Kit | One of each animation: Swoop (entrance), Dip (key press), Bounce (letters) and Glide (switching between letters, 123 and #+=). |
 | Snowfall | An animated background: snow drifting behind the keys, with a puff of light from every key you press. |
@@ -263,15 +264,15 @@ return in a search field: same two hooks.
 `bar_items(state)` offers things someone can place in the bar above the keys,
 from Layout > Top bar (a Pro feature). `bar_button(id, name, icon=, title=)` is
 a tap target: `icon` is an SF Symbol and `title` is up to 12 characters drawn
-beside it. `bar_knob(id, name, icon=, min=, max=, step=, value=, setting=)` is
+beside it. `bar_knob(id, name, icon=, min=, max=, step=, value=, setting=, art=, rotor=)` is
 a dial you drag up or right to turn up. A tap, or a knob let go, calls
 `on_action(id, value, state)`: `value` is `None` for a button and the number
 for a knob. Give a knob `setting=` (any number control, like `"sound.volume"`)
 and it reads and writes that setting itself, with its range, so `min`, `max`,
 `step` and `value` aren't needed; each step also plays a key click at the new
 level. Without `setting=` the knob shows `value` and the plugin keeps it in its
-state. Whoever places a knob picks how it's drawn in the builder: a ring, or
-the mechanical knob the Tools button uses. `bar_items` is read when the
+state. Whoever places a knob picks how it's drawn in the builder: its authored
+artwork, a ring, or one of the built-in finishes. `bar_items` is read when the
 keyboard opens and again on the tick, so keep it as cheap as `draw`.
 
 ### Flicks
@@ -336,3 +337,16 @@ Plugins run as you type, so adding a repository is a stronger trust decision tha
 ## Publishing is automatic
 
 Keep `Plugins/`, `tools/`, and `.github/workflows/` in your fork. Add or update a plugin and push to `main`. GitHub Actions refreshes the `latest` release.
+
+### Drawing a custom top-bar knob
+
+`bar_knob(..., art=art([...]), rotor=art([...]))` uses the key-art shape
+vocabulary for a stationary body and a rotating face. Either part is optional;
+use `unit="key"` for dimensions relative to the dial. A pointer drawn above
+the centre rotates through a 270-degree sweep as the value changes. Clink
+handles the drag, snapping, accessibility and `setting=` binding. Each part
+supports up to 16 shapes. The builder defaults to the authored Custom finish
+and also offers its built-in finishes. See `Plugins/typewriter.py` for a
+nickel bezel and dark platen knob matching the Typewriter cap. That cap uses
+`outline="rect"` without `corner=`, preserving the user's key dimensions and
+rounding.

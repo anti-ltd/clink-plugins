@@ -106,16 +106,29 @@
       }
     },
     {
+      "id": "low-profile-mod",
+      "name": "Low Profile Mod",
+      "version": "1.0",
+      "icon": "slider.horizontal.3",
+      "summary": "An example that adjusts the built-in mechanical key style",
+      "asset": {
+        "path": "low-profile-mod.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/low-profile-mod.clinkplugin",
+        "sha256": "68b3c72ce351e8448ce4f7617a2f616813854e10c8cc73be9349ee1308b1bb29",
+        "byteCount": 900
+      }
+    },
+    {
       "id": "low-profile",
       "name": "Low Profile",
-      "version": "1.0",
+      "version": "2.0",
       "icon": "square.stack.3d.up",
       "summary": "A low-profile mechanical key style for the theme editor",
       "asset": {
         "path": "low-profile.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/low-profile.clinkplugin",
-        "sha256": "ba6bb9a1c782cc4f78d824e346b787a52b84e39afa075d869cbe8dfd663faf89",
-        "byteCount": 1093
+        "sha256": "f6ad069bb1e9a7d2afe0f478bd50bc00501bc144327ab0540eb8e8895366416d",
+        "byteCount": 2876
       }
     },
     {
@@ -199,14 +212,14 @@
     {
       "id": "typewriter",
       "name": "Typewriter",
-      "version": "3.0",
+      "version": "3.1",
       "icon": "keyboard.badge.ellipsis",
       "summary": "Typewriter keys, a light and a dark theme, a typebar press and clacky haptics",
       "asset": {
         "path": "typewriter.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/typewriter.clinkplugin",
-        "sha256": "4efb1dae6b395825c513fdae9264a840c3ab76b547b5faa027ad542bf8dfffed",
-        "byteCount": 8201
+        "sha256": "7035f2bc516bd4d5e10f4bff68ddc882c2da22f27a45bd3ae201f99654b5f52b",
+        "byteCount": 9306
       }
     },
     {

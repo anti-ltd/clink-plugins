@@ -2,7 +2,7 @@
 # name: Typewriter
 # icon: keyboard.badge.ellipsis
 # summary: Typewriter keys, a light and a dark theme, a typebar press and clacky haptics
-# version: 3.0
+# version: 3.1
 # author: Clink
 # ---
 
@@ -11,8 +11,8 @@
 # key_styles(state) draws the key itself. A cap(...) is an outline and a stack
 # of layers, painted bottom first, and the keyboard draws exactly what is
 # listed here, so copying this file and changing the layers gives you your
-# own key. The typewriter key is a round glass face in a chrome ring,
-# standing on a stem; the wide keys become bars with round ends.
+# own key. The glass face and chrome ring follow the user's key dimensions
+# and corner rounding, standing on a stem.
 #
 # Colours are written against the key they land on: "face" is the key's own
 # colour, "text" its letter colour, "background" the keyboard behind it and
@@ -55,7 +55,7 @@ RING = 2.9
 
 
 def typewriter_cap():
-    return cap(outline="round", travel=2.5, layers=[
+    return cap(outline="rect", travel=2.5, layers=[
         # The stem's shadow on the machine body. It stays put while the cap
         # drops, and pulls in under it when pressed.
         cap_layer("fill", "background*0.2@0.75", blur=1.8, y=5.8, pressed_y=2, moves=False),
@@ -176,3 +176,24 @@ def haptics(state):
         "return": feel("heavy", intensity=1, sharpness=0.2),
         "delete": feel("rigid", intensity=0.5, sharpness=0.8),
     }
+
+
+# A nickel bezel around a dark platen knob, with a turning ivory pointer.
+# Normalized dimensions follow the top bar's available dial size. Clink turns
+# the rotor natively during a drag; no Python work is needed per frame.
+def bar_items(state):
+    return [bar_knob("volume", "Typewriter", icon="speaker.wave.2.fill",
+                    setting="sound.volume", art=art([
+        shape("circle", unit="key", size=0.96,
+              fill=gradient("linear", ["#f7f7f7", "#757575", "#4d4d4d", "#e6e6e6"],
+                            stops=[0, 0.44, 0.55, 1]),
+              stroke="#161514", line_width=0.6),
+        shape("circle", unit="key", size=0.78,
+              fill=gradient("linear", ["#57504a", "#262422", "#141312"])),
+        shape("circle", unit="key", size=0.64, fill="#262422",
+              stroke="#77716a", line_width=0.6),
+    ]), rotor=art([
+        shape("rect", unit="key", y=-0.23, width=0.07, height=0.24,
+              corner=1, fill="#f3ecdb"),
+        shape("circle", unit="key", size=0.12, fill="#b3b3b3"),
+    ]))]

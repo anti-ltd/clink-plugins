@@ -2,27 +2,37 @@
 # name: Typewriter
 # icon: keyboard.badge.ellipsis
 # summary: Typewriter keys, a light and a dark theme, a typebar press and clacky haptics
-# version: 2.0
+# version: 3.0
 # author: Clink
 # ---
 
 # An old typewriter, in four parts.
 #
+# key_styles(state) draws the key itself. A cap(...) is an outline and a stack
+# of layers, painted bottom first, and the keyboard draws exactly what is
+# listed here, so copying this file and changing the layers gives you your
+# own key. The typewriter key is a round glass face in a chrome ring,
+# standing on a stem; the wide keys become bars with round ends.
+#
+# Colours are written against the key they land on: "face" is the key's own
+# colour, "text" its letter colour, "background" the keyboard behind it and
+# "tint" the press colour. Add *0.8 to darken, +0.2 to lighten toward white,
+# and @0.5 for opacity. A layer with when="pale" only draws on light keys and
+# when="dark" on dark ones, which is how one cap suits ivory and black alike.
+# gradient(...) is the same one key art uses: its colours top to bottom, with
+# stops= placing them.
+#
+# popups(state) adds Typed Slip under Look > Popups: the letter you pressed,
+# struck in ribbon ink on a slip of typing paper. Its body is a cap(...) too,
+# painted the same way as the keys.
+#
 # themes(state) adds two themes to the Plugins tab of the theme gallery:
-# Typewriter Ivory, cream keys on a tan body, and Typewriter Noir, black glass
-# keys on black enamel. Both use the typewriter key finish and the
+# Typewriter Ivory and Typewriter Noir, both with this key and the
 # typewriter face for the letters.
 #
-# key_styles(state) offers the same key finish on its own, for any theme,
-# under Design > Style > From plugins. The keys become round glass caps in a
-# chrome ring, standing on stems, and the wide keys become bars.
-#
-# animations(state) adds Typebar under Look > Reactions > Geometry, a key that
-# goes a long way down and comes back stiff, and Strike under Letters, the
-# letter jumping up at the paper.
-#
-# haptics(state) makes the letters clack, and gives return the thunk of a
-# carriage coming back. Its switch sits under Sound & Haptics.
+# animations(state) adds Typebar under Look > Reactions > Geometry and Strike
+# under Letters. haptics(state) makes the letters clack and gives return the
+# thunk of a carriage coming back; its switch sits under Sound & Haptics.
 
 def initial():
     return {"on": True}
@@ -40,9 +50,92 @@ def on_action(action, value, state):
     return state
 
 
+# How wide the chrome ring is. The face and its glass sit inside it.
+RING = 2.9
+
+
+def typewriter_cap():
+    return cap(outline="round", travel=2.5, layers=[
+        # The stem's shadow on the machine body. It stays put while the cap
+        # drops, and pulls in under it when pressed.
+        cap_layer("fill", "background*0.2@0.75", blur=1.8, y=5.8, pressed_y=2, moves=False),
+
+        # The side of the ring, showing below the cap.
+        cap_layer("fill", gradient("linear", ["#858585", "#333333", "#575757"], stops=[0, 0.7, 1]),
+                  y=3.2, pressed_y=3.3),
+
+        # The ring: bright sky over a dark horizon, then the ground light
+        # coming back up, the way polished nickel reflects a room.
+        cap_layer("fill", gradient("linear",
+                                   ["#f7f7f7", "#d1d1d1", "#757575", "#4d4d4d", "#b3b3b3", "#e6e6e6"],
+                                   stops=[0, 0.22, 0.46, 0.53, 0.78, 1])),
+        cap_layer("stroke", "black@0.45", width=0.6),
+
+        # The face, dished: in shadow under the top of the ring and catching
+        # the light toward the bottom.
+        cap_layer("fill", gradient("linear", ["face*0.8", "face", "face+0.18"], stops=[0, 0.42, 1]),
+                  inset=RING, when="pale"),
+        cap_layer("fill", gradient("linear", ["face*0.55", "face", "face+0.12"], stops=[0, 0.42, 1]),
+                  inset=RING, when="dark"),
+        cap_layer("inner", "black@0.35", width=1.1, blur=0.5, inset=RING, when="pale"),
+        cap_layer("inner", "black@0.6", width=1.1, blur=0.5, inset=RING, when="dark"),
+
+        # A pressed key, and a latched one like caps lock, take the tint.
+        cap_layer("fill", "tint@0.24", inset=RING, when="pressed"),
+        cap_layer("fill", "tint@0.16", inset=RING, when=["highlighted", "resting"]),
+
+        # Glare on the glass: a soft sheet over the upper half and a bright
+        # crescent tucked under the ring.
+        cap_layer("fill", gradient("linear", ["white@0.55", "white@0.12", "white@0"], stops=[0, 0.4, 0.52]),
+                  inset=RING + 0.8, when="pale"),
+        cap_layer("fill", gradient("linear", ["white@0.26", "white@0.06", "white@0"], stops=[0, 0.4, 0.52]),
+                  inset=RING + 0.8, when="dark"),
+        cap_layer("stroke", "white@0.85", width=0.9, inset=RING + 0.7, fade="top", when="pale"),
+        cap_layer("stroke", "white@0.5", width=0.9, inset=RING + 0.7, fade="top", when="dark"),
+    ])
+
+
 def keys():
     return key_style("typewriter", "Typewriter", icon="circle.circle",
-                     material="typewriter", shadow=0, outline=0)
+                     cap=typewriter_cap(), shadow=0, outline=0)
+
+
+def key_styles(state):
+    return [keys()]
+
+
+def paper_slip():
+    return cap(outline="rect", corner=3, travel=0, layers=[
+        # The slip lifts off the keys, so its shadow falls soft and low.
+        cap_layer("fill", "black@0.32", blur=3, y=3.5),
+
+        # The paper, warm and a touch darker toward the bottom. It is the same
+        # paper whatever the theme, so the ink below is fixed too.
+        cap_layer("fill", gradient("linear", ["#fcf8ee", "#f3ecda", "#e9dfc6"], stops=[0, 0.6, 1])),
+
+        # A ruled line under the letter, and the red margin rule down the
+        # left, drawn as gradients with hard stops.
+        cap_layer("fill", gradient("linear", ["#8fa8c8@0", "#8fa8c8@0", "#8fa8c8@0.6",
+                                              "#8fa8c8@0.6", "#8fa8c8@0", "#8fa8c8@0"],
+                                   stops=[0, 0.8, 0.8, 0.83, 0.83, 1]), inset=3),
+        cap_layer("fill", gradient("linear", ["accent@0", "accent@0", "accent@0.55",
+                                              "accent@0.55", "accent@0", "accent@0"],
+                                   stops=[0, 0.13, 0.13, 0.16, 0.16, 1],
+                                   start=[0, 0.5], end=[1, 0.5])),
+
+        # The paper's cut edge, and the light catching its top.
+        cap_layer("stroke", "#b5a47c@0.8", width=0.8),
+        cap_layer("stroke", "white@0.9", width=1, inset=0.8, fade="top"),
+    ])
+
+
+def popups(state):
+    return [
+        popup_style("slip", "Typed Slip", icon="doc.plaintext",
+                    cap=paper_slip(), ink="#1b1916@0.94",
+                    width=52, height=64, lift=46, font_size=34,
+                    response=0.22, damping=0.72),
+    ]
 
 
 def themes(state):
@@ -63,10 +156,6 @@ def themes(state):
               font="typewriter", weight="semibold",
               style=keys()),
     ]
-
-
-def key_styles(state):
-    return [keys()]
 
 
 def animations(state):

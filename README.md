@@ -27,12 +27,13 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Snowfall | An animated background: snow drifting behind the keys, with a puff of light from every key you press. |
 | Colemak-DH | The Colemak-DH layout, installed as an ordinary custom layout you can edit. |
 | Heavy Space | A heavier haptic on the space bar, a crisp one on return and a light one on delete. Its switch sits under Sound & Haptics. |
-| Caps Lock Light | A little green lamp in the top right of shift that lights while caps lock is on, and sits dark when it is off. Pick the colour and the glow under Keys. |
+| Caps Lock Light | A little green lamp in the top right of shift that lights while caps lock is on, and sits dark when it is off. Drawn entirely by the script with `key_art` and lit from `on_event`, so it doubles as the example for both. |
+| Press Spark | A ring in the theme's accent colour around whichever key is down. The example for the `key_down` and `key_up` events. |
 | Adaptive Hitbox | Learns where you actually tap each key and moves its target toward it. Its switch sits under Keys > Hitboxes. |
 | Shorthand | Suggests "be right back" while you type brb (and a few more), can expand them on space, and keeps autocorrect off words in capitals and words with digits. |
 | Switch Volume | A knob for the top bar that sets how loud your key presses are. Drag it and each step clicks at the new level. Add it from Layout > Top bar. |
 | Swipe Trails | Six trails for swipe typing: Candy Ribbon (a pastel band that keeps flowing), Stardust, Love Letter (hearts), Laser, Stitches and Ink Brush. Pick one from Gestures > Swipe typing; your thickness, taper and trail-the-finger settings still shape it. |
-| Typewriter | Two themes for the Plugins tab of the theme gallery, Typewriter Ivory and Typewriter Noir, with round glass keys in chrome rings and a typewriter face. The key finish on its own for any theme, a deep Typebar press, a Strike letter animation, and clacky haptics with a heavy return. The haptics switch sits under Sound & Haptics. |
+| Typewriter | A key and a popup drawn entirely in Python: round glass faces in chrome rings on stems, with bars for the wide keys, and a Typed Slip popup that strikes your letter on typing paper. Two themes for the Plugins tab of the theme gallery, Typewriter Ivory and Typewriter Noir, the key on its own for any theme, a deep Typebar press, a Strike letter animation, and clacky haptics with a heavy return. The haptics switch sits under Sound & Haptics. |
 
 The files live in [`Plugins/`](Plugins). Each one is an ordinary Python file, readable in one sitting, that starts with a short header:
 
@@ -83,7 +84,9 @@ A plugin script may define any of these functions:
 | `suggestions(word, state)` | Words for the suggestion bar while `word` is being typed. |
 | `correct(word, fix, state)` | Space ended `word`. Return the word to commit, `False` to keep it as typed, or `None` for the keyboard's own `fix`. |
 | `bar_items(state)` | Buttons and knobs this plugin offers the top bar. Return `bar_button(...)` and `bar_knob(...)` entries; see Top bar below. |
-| `key_lights(state)` | A small lamp on a key, as a dict: `{"shift": key_light("#35e06f")}`. See Key lights below. |
+| `key_art(state)` | Draw on the keys: a dict from key names to lists of `shape(...)`. See Key art below. |
+| `on_event(name, info, state)` | Anything that happens on the keyboard, in one hook. See Events below. |
+| `events(state)` | The event names `on_event` wants. Leave it out for all but the busy ones. |
 
 An element can let each placed copy decide something for itself with
 `option(key, label, choices=["a", "b"])` or `option(key, label, default=False)`.
@@ -151,9 +154,9 @@ per frame: a look is only numbers and words.
 
 | Builder | Where it shows | Keywords |
 |---|---|---|
-| `key_style(id, name)` | Theme editor, Style card. Applied to the theme being edited. | `material` (`solid`, `empty`, `metal`, `3d`, `classic`, `slab`, `gamepad`, `liquidIce`, `molten`, `eink`, `typewriter`), `variant` (`retro`, `modern`, `mechanical`, `mechanicalSwitches`, `berry`), `shape` (`rect`, `fret`, `berry`, `bevel`, `dome`), `glass`, `fan`, `inner_radius`, `face_inset`, `edges`, `raised`, `light_angle`, `shadow` (0 is flat), `shadow_radius`, `shadow_y`, `outline`, `outline_opacity` |
+| `key_style(id, name)` | Theme editor, Style card. Applied to the theme being edited. | `cap`, a `cap(...)` that draws the whole key (see Drawn keys below), or `material` (`solid`, `empty`, `metal`, `3d`, `classic`, `slab`, `gamepad`, `liquidIce`, `molten`, `eink`), `variant` (`retro`, `modern`, `mechanical`, `mechanicalSwitches`, `berry`), `shape` (`rect`, `fret`, `berry`, `bevel`, `dome`), `glass`, `fan`, `inner_radius`, `face_inset`, `edges`, `raised`, `light_angle`, `shadow` (0 is flat), `shadow_radius`, `shadow_y`, `outline`, `outline_opacity` |
 | `theme(id, name)` | Themes, Plugins tab. Installed as a theme of your own when picked. | `background`, `keys` and `key_text` (required), `background_bottom` to fade the background, `special`, `special_text`, `accent`, all `"#rrggbb"`; `dark`; `font` (`default`, `rounded`, `serif`, `monospaced`, `avenir`, `georgia`, `futura`, `typewriter`, `copperplate`, `chalkboard`, `marker`, `script`); `weight` (`thin` to `black`); `style`, a `key_style(...)` for the finish |
-| `popup_style(id, name)` | Look > Popups | `shape` (`tile`, `round`, `balloon`), `width`, `height`, `lift`, `font_size`, `corner`, `opacity`, `response`, `damping` |
+| `popup_style(id, name)` | Look > Popups | `shape` (`tile`, `round`, `balloon`), `width`, `height`, `lift`, `font_size`, `corner`, `opacity`, `response`, `damping`, or `cap=` to draw the body yourself with a `cap(...)` (see Drawn keys) and `ink=` for the letter's colour or gradient |
 | `entrance(id, name)` | Look > Entrance | Where the keyboard starts: `opacity`, `x`, `y`, `scale`, `tilt`, `spin`, plus `anchor` (`bottom`, `center`, `top`), `response`, `damping` |
 | `press_animation(id, name)` | Look > Reactions > Geometry | A held key: `scale` or `scale_x` and `scale_y`, `x`, `y`, `rotation`, `response`, `damping` |
 | `letter_animation(id, name)` | Look > Reactions > Letters | A letter at the peak of its tap: `scale` or `scale_x` and `scale_y`, `x`, `y`, `rotation`, `anchor` |
@@ -165,6 +168,38 @@ per frame: a look is only numbers and words.
 Every look also takes `icon=` for its tile. A misspelt keyword, a word outside
 its list or a string where a number goes is an error in the editor console,
 and numbers are held to the same ranges the app's own controls use.
+
+### Drawn keys
+
+A `key_style` can draw the key itself instead of choosing a built-in material.
+`cap(outline=, corner=, round_up_to=, travel=, layers=[...])` is an outline and
+up to sixteen layers painted on it, bottom first. The keyboard draws exactly
+what is listed, and its lighting effects follow the same outline, so a new key
+needs nothing but Python. [`Plugins/typewriter.py`](Plugins/typewriter.py) is
+a whole typewriter key written this way.
+
+- `outline` is `"round"` (a circle on keys up to `round_up_to` times wider
+  than tall, a pill on wider ones) or `"rect"` (rounded by `corner`, or the
+  theme's own radius). The outline shrinks to leave room for every layer's
+  offset and blur, so shadows never spill off the key.
+- `travel` is how far a pressed key's layers and its letter move down.
+- A popup takes the same `cap(...)` for its body, painted against the
+  theme's letter keys, and `ink=` paints its letter.
+- `cap_layer(kind, paint, ...)`: `kind` is `"fill"`, `"stroke"` (a line
+  `width` wide inside the outline) or `"inner"` (a stroke blurred and kept
+  inside, for a lip or a dished face). `inset` shrinks the outline for this
+  layer, `x` and `y` move it, `blur`, `opacity`, and `fade` (`"top"` or
+  `"bottom"`) fades it toward the middle. `moves=False` keeps a layer still
+  while the key goes down, and `pressed_y=` says exactly where it sits then.
+  `when=` is a word or list of words that must all hold: `"pale"` or `"dark"`
+  (the key's own colour), `"pressed"`, `"resting"`, `"highlighted"`.
+- `paint` is a colour, `color(value, opacity)`, or the same
+  `gradient("linear" | "radial", colors, stops=, start=, end=, center=,
+  radius=)` key art uses. A colour is written against the key it lands on:
+  `"face"`, `"text"`, `"accent"`, `"background"`, `"tint"` (the press colour),
+  `"white"`, `"black"`, `"#rrggbb"` or `"#rrggbbaa"`, then optionally `*0.8`
+  to darken, `+0.2` to lighten toward white, and `@0.5` for opacity. So one
+  design works on light keys and dark ones, and in any theme.
 
 ### Typing
 
@@ -184,22 +219,44 @@ every key, and its words lead the bar. `correct(word, fix, state)` runs once
 per word when space ends it, even with autocorrect off, and never in a
 password field. The first plugin to answer something other than `None` wins.
 
-### Key lights
+### Key art
 
-`key_lights(state)` puts a small lamp in the corner of a key, like the caps
-lock LED on a desktop keyboard. It returns a dict from key names to
-`key_light(color, off_color=, when=, corner=, size=, inset=, glow=)`, or just
-a colour string for a caps lock lamp in that colour. The keys that can carry
-one are `"shift"`, `"delete"`, `"space"`, `"return"` and `"globe"`.
+`key_art(state)` draws on the keys. It returns a dict from key names (the same
+ones `haptics` uses, `"letters"` and `"keys"` included) to a list of shapes,
+one shape, or `art([...], animate=seconds)` to ease between changes.
 
-`when` is `"caps_lock"` (the default), `"shift"` for shift in either state, or
-`"always"`. The keyboard works out whether the lamp is lit by itself, so it
-follows caps lock the moment it changes and your script never runs for it.
-While it's dark the lamp stays as a dark, colourless well in the key, or
-`off_color` if you give one. `corner` is `"top_right"`, `"top_left"`,
-`"bottom_right"` or `"bottom_left"`, `size` is the diameter in points (2 to
-12) and `inset` is how far it sits from the key's edges. The table is read
-when the keyboard loads its plugins.
+`shape(kind, ...)` is the one drawing builder. `kind` is `"circle"`, `"rect"`,
+`"capsule"`, `"line"`, `"path"`, `"text"` or `"icon"`. A shape sits at an
+`anchor` on the key (`"center"`, `"top_right"`, `"bottom"` and so on) and `x`
+and `y` move it right and down from there, in points, or in shares of the key
+with `unit="key"`. `size=` or `width=`/`height=` give its box; `points=` are a
+line's or a path's points across that box, 0 to 1. `text=` is the words of a
+text or the SF Symbol of an icon, with `font_size=` and `weight=`.
+
+`fill=` and `stroke=` take `"#rrggbb"`, `"#rrggbbaa"`, `"text"` or `"accent"`
+(the colours of the theme the key is on), `color(value, opacity)`, or
+`gradient("linear" | "radial", colors, stops=, start=, end=, center=, radius=)`.
+There is also `line_width`, `corner`, `trim_from`/`trim_to` (part of an
+outline, so an arc is a trimmed circle), `rotation`, `opacity`, `blur`, and
+`shadow=` with one `shadow(color, radius=, x=, y=)` or a list of up to three.
+A key holds sixteen shapes.
+
+### Events
+
+`on_event(name, info, state)` hears what happens on the keyboard: `"open"`,
+`"close"`, `"word"`, `"backspace"`, `"suggestion"`, `"language"`, `"field"`,
+`"shift"` (`info["state"]` is `"off"`, `"on"` or `"locked"`) and `"plane"`
+(`info["plane"]`). Four more are busy, running once a key press or once a
+second, so you only get them by asking: `"key_down"` and `"key_up"`
+(`info["key"]`), `"key"` (`info["text"]`) and `"tick"`. `events(state)` returns
+the names you want; leave it out and you hear everything but the busy four.
+
+The keyboard asks `key_art` again after every event you hear, so a drawing
+reacts by changing `state` in `on_event` and drawing from it. `context()` also
+has `"shift"` and `"plane"`, for reading where things stand when you open.
+Caps Lock Light is the worked example: four circles, lit from the `shift`
+event. Light a dot on whichever key is down, put a counter on space, underline
+return in a search field: same two hooks.
 
 ### Top bar
 

@@ -30,14 +30,14 @@
     {
       "id": "caps-lock-light",
       "name": "Caps Lock Light",
-      "version": "1.0",
+      "version": "1.1",
       "icon": "capslock",
       "summary": "A little green lamp on shift that lights while caps lock is on",
       "asset": {
         "path": "caps-lock-light.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/caps-lock-light.clinkplugin",
-        "sha256": "c6f80284487c2165434d1cf4a364387271e6a8a18b5919096272e12ed8a46ac9",
-        "byteCount": 2057
+        "sha256": "aa16345f1e300284e1363a72c0f5295a01ad882c3e2da88c63b0afcef70ae607",
+        "byteCount": 4598
       }
     },
     {
@@ -132,6 +132,19 @@
       }
     },
     {
+      "id": "press-spark",
+      "name": "Press Spark",
+      "version": "1.0",
+      "icon": "sparkle",
+      "summary": "A ring in the theme's accent colour around whichever key is down",
+      "asset": {
+        "path": "press-spark.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/press-spark.clinkplugin",
+        "sha256": "cbd2afb833bd7cb3e990003503c61ba4ac8ab6ade5cb906ce31774fa4e276611",
+        "byteCount": 1718
+      }
+    },
+    {
       "id": "shorthand",
       "name": "Shorthand",
       "version": "1.0",
@@ -186,14 +199,14 @@
     {
       "id": "typewriter",
       "name": "Typewriter",
-      "version": "2.0",
+      "version": "3.0",
       "icon": "keyboard.badge.ellipsis",
       "summary": "Typewriter keys, a light and a dark theme, a typebar press and clacky haptics",
       "asset": {
         "path": "typewriter.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/typewriter.clinkplugin",
-        "sha256": "285ba1f89ca92e5a5f856e31702ea54a24294bf848aa2bc8eae232c59e8484f4",
-        "byteCount": 3186
+        "sha256": "4efb1dae6b395825c513fdae9264a840c3ab76b547b5faa027ad542bf8dfffed",
+        "byteCount": 8201
       }
     },
     {

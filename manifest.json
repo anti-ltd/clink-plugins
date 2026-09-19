@@ -28,6 +28,19 @@
       }
     },
     {
+      "id": "caps-lock-light",
+      "name": "Caps Lock Light",
+      "version": "1.0",
+      "icon": "capslock",
+      "summary": "A little green lamp on shift that lights while caps lock is on",
+      "asset": {
+        "path": "caps-lock-light.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/caps-lock-light.clinkplugin",
+        "sha256": "c6f80284487c2165434d1cf4a364387271e6a8a18b5919096272e12ed8a46ac9",
+        "byteCount": 2057
+      }
+    },
+    {
       "id": "clock",
       "name": "Clock",
       "version": "1.1",
@@ -145,16 +158,29 @@
       }
     },
     {
+      "id": "swipe-trails",
+      "name": "Swipe Trails",
+      "version": "1.0",
+      "icon": "scribble.variable",
+      "summary": "Six trails for swipe typing, from a candy ribbon to a line of hearts",
+      "asset": {
+        "path": "swipe-trails.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/swipe-trails.clinkplugin",
+        "sha256": "4822c355d8213870a7ef13fdb042c9c66ecb90cac89fcf15160e44acf97bb957",
+        "byteCount": 4784
+      }
+    },
+    {
       "id": "switch-volume",
       "name": "Switch Volume",
-      "version": "1.0",
+      "version": "1.1",
       "icon": "speaker.wave.2.fill",
       "summary": "A knob in the top bar that sets how loud your key presses are",
       "asset": {
         "path": "switch-volume.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/switch-volume.clinkplugin",
-        "sha256": "00173fa423a8c7dfd79e7bfe35c15a69ba79899a0c431a9b98a31b5150a7e798",
-        "byteCount": 1311
+        "sha256": "17a0e89932f720758c25d9837e8dc8f9a0158878a9bbde76fd8bb1d62a86f4c4",
+        "byteCount": 1485
       }
     },
     {

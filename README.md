@@ -27,9 +27,11 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Snowfall | An animated background: snow drifting behind the keys, with a puff of light from every key you press. |
 | Colemak-DH | The Colemak-DH layout, installed as an ordinary custom layout you can edit. |
 | Heavy Space | A heavier haptic on the space bar, a crisp one on return and a light one on delete. Its switch sits under Sound & Haptics. |
+| Caps Lock Light | A little green lamp in the top right of shift that lights while caps lock is on, and sits dark when it is off. Pick the colour and the glow under Keys. |
 | Adaptive Hitbox | Learns where you actually tap each key and moves its target toward it. Its switch sits under Keys > Hitboxes. |
 | Shorthand | Suggests "be right back" while you type brb (and a few more), can expand them on space, and keeps autocorrect off words in capitals and words with digits. |
 | Switch Volume | A knob for the top bar that sets how loud your key presses are. Drag it and each step clicks at the new level. Add it from Layout > Top bar. |
+| Swipe Trails | Six trails for swipe typing: Candy Ribbon (a pastel band that keeps flowing), Stardust, Love Letter (hearts), Laser, Stitches and Ink Brush. Pick one from Gestures > Swipe typing; your thickness, taper and trail-the-finger settings still shape it. |
 | Typewriter | Two themes for the Plugins tab of the theme gallery, Typewriter Ivory and Typewriter Noir, with round glass keys in chrome rings and a typewriter face. The key finish on its own for any theme, a deep Typebar press, a Strike letter animation, and clacky haptics with a heavy return. The haptics switch sits under Sound & Haptics. |
 
 The files live in [`Plugins/`](Plugins). Each one is an ordinary Python file, readable in one sitting, that starts with a short header:
@@ -73,6 +75,7 @@ A plugin script may define any of these functions:
 | `popups(state)` | Key popup styles. Return `popup_style(...)` entries. |
 | `animations(state)` | Any mix of `entrance(...)`, `press_animation(...)`, `letter_animation(...)` and `transition(...)`. |
 | `backgrounds(state)` | Animated backgrounds. Return `background(...)` entries made of `particles(...)` layers. |
+| `trails(state)` | Swipe trails. Return `trail(...)` entries made of `trail_line(...)`, `trail_stamps(...)` and `trail_head(...)` layers. |
 | `layouts(state)` | Keyboard layouts. Return `layout(...)` entries. |
 | `haptics(state)` | A haptic per key, as a dict: `{"space": "heavy"}`. See Typing below. |
 | `hitboxes(state)` | A hit area per key, as a dict: `{"a": hitbox(x=-0.1)}`. |
@@ -80,6 +83,7 @@ A plugin script may define any of these functions:
 | `suggestions(word, state)` | Words for the suggestion bar while `word` is being typed. |
 | `correct(word, fix, state)` | Space ended `word`. Return the word to commit, `False` to keep it as typed, or `None` for the keyboard's own `fix`. |
 | `bar_items(state)` | Buttons and knobs this plugin offers the top bar. Return `bar_button(...)` and `bar_knob(...)` entries; see Top bar below. |
+| `key_lights(state)` | A small lamp on a key, as a dict: `{"shift": key_light("#35e06f")}`. See Key lights below. |
 
 An element can let each placed copy decide something for itself with
 `option(key, label, choices=["a", "b"])` or `option(key, label, default=False)`.
@@ -155,6 +159,7 @@ per frame: a look is only numbers and words.
 | `letter_animation(id, name)` | Look > Reactions > Letters | A letter at the peak of its tap: `scale` or `scale_x` and `scale_y`, `x`, `y`, `rotation`, `anchor` |
 | `transition(id, name)` | Look > Transition | How far the old keys leave: `x` and `y` as a share of the keyboard, `scale`, `tilt`, `fade`, `duration` |
 | `background(id, name, layers=[...], colors=[...])` | Look > Background | Up to four `particles(...)` layers: `shape` (`dot`, `glow`, `streak`, `ring`, `square`), `count`, `size`, `size_range`, `speed`, `direction` (`none`, `up`, `down`, `left`, `right`), `spread`, `gravity`, `wobble`, `life`, `twinkle`, `opacity`, `color`, `burst`, `burst_speed` |
+| `trail(id, name, layers=[...], colors=[...])` | Gestures > Swipe typing | Up to four layers, painted bottom to top, and up to eight colours (`"#rrggbb"`, or `"accent"` for the theme's accent). Widths and sizes are in units of the person's trail thickness. `trail_line`: `width`, `tail_width`, `opacity`, `tail_opacity`, `color` (-1 runs all the colours along the glide), `band` (points per run through the colours), `flow` (runs per second), `dash`, `gap`, `glow`. `trail_stamps(shape)`: `shape` (`dot`, `ring`, `square`, `diamond`, `star`, `spark`, `heart`), `size`, `size_range`, `tail_size`, `spacing`, `scatter`, `spin`, `twinkle`, `opacity`, `tail_opacity`, `color`, `glow`. `trail_head(shape)`: `shape`, `size`, `pulse`, `opacity`, `color`, `glow` |
 | `layout(id, name, rows=[...])` | Layout > Arrangement. Installed as a custom layout. | Rows of keys: a string is a letter, `layout_key(glyph, action=, width=)` anything else. `left=[...]` and `right=[...]` put keys beside the space bar. |
 
 Every look also takes `icon=` for its tile. A misspelt keyword, a word outside
@@ -178,6 +183,23 @@ tap has been handled.
 every key, and its words lead the bar. `correct(word, fix, state)` runs once
 per word when space ends it, even with autocorrect off, and never in a
 password field. The first plugin to answer something other than `None` wins.
+
+### Key lights
+
+`key_lights(state)` puts a small lamp in the corner of a key, like the caps
+lock LED on a desktop keyboard. It returns a dict from key names to
+`key_light(color, off_color=, when=, corner=, size=, inset=, glow=)`, or just
+a colour string for a caps lock lamp in that colour. The keys that can carry
+one are `"shift"`, `"delete"`, `"space"`, `"return"` and `"globe"`.
+
+`when` is `"caps_lock"` (the default), `"shift"` for shift in either state, or
+`"always"`. The keyboard works out whether the lamp is lit by itself, so it
+follows caps lock the moment it changes and your script never runs for it.
+While it's dark the lamp stays as a dark, colourless well in the key, or
+`off_color` if you give one. `corner` is `"top_right"`, `"top_left"`,
+`"bottom_right"` or `"bottom_left"`, `size` is the diameter in points (2 to
+12) and `inset` is how far it sits from the key's edges. The table is read
+when the keyboard loads its plugins.
 
 ### Top bar
 

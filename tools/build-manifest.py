@@ -20,7 +20,7 @@ import hashlib, json, os, pathlib, sys
 
 root = pathlib.Path(__file__).resolve().parents[1]
 repo = os.environ.get("GITHUB_REPOSITORY", "anti-ltd/clink-plugins")
-fields = ["name", "icon", "summary", "version", "author", "enabled"]
+fields = ["name", "icon", "summary", "version", "author", "enabled", "exclusiveResources"]
 
 
 def fail(path, message):
@@ -59,6 +59,8 @@ def pack(path):
         "enabled": meta.get("enabled", "true").lower() != "false",
         "source": source,
     }
+    if meta.get("exclusiveResources"):
+        plugin["exclusiveResources"] = [value.strip() for value in meta["exclusiveResources"].split(",") if value.strip()]
     return (json.dumps(plugin, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
 
 

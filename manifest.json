@@ -30,14 +30,14 @@
     {
       "id": "caps-lock-light",
       "name": "Caps Lock Light",
-      "version": "1.1",
+      "version": "1.2",
       "icon": "capslock",
       "summary": "A little green lamp on shift that lights while caps lock is on",
       "asset": {
         "path": "caps-lock-light.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/caps-lock-light.clinkplugin",
-        "sha256": "aa16345f1e300284e1363a72c0f5295a01ad882c3e2da88c63b0afcef70ae607",
-        "byteCount": 4598
+        "sha256": "28f5eec4eef4c7791179a3232b98dc21d3656370240b726f17bd9d875c4c05a4",
+        "byteCount": 5197
       }
     },
     {
@@ -90,6 +90,45 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/heavy-space.clinkplugin",
         "sha256": "14ef0c65cee320e5de40592309f8be377cdec6428a6ae6abfdd63440ad601fb7",
         "byteCount": 1568
+      }
+    },
+    {
+      "id": "language-badge",
+      "name": "Language Badge",
+      "version": "1.2",
+      "icon": "globe",
+      "summary": "Show the active language in the corner of the space bar",
+      "asset": {
+        "path": "language-badge.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/language-badge.clinkplugin",
+        "sha256": "7d027935f1479b45ab909f3bde97a5541c3716098d7d9539329d2d1faaaf9b2a",
+        "byteCount": 759
+      }
+    },
+    {
+      "id": "language-emoji",
+      "name": "Language Emoji",
+      "version": "1.1",
+      "icon": "face.smiling",
+      "summary": "Show the active language as a flag emoji on the space bar",
+      "asset": {
+        "path": "language-emoji.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/language-emoji.clinkplugin",
+        "sha256": "b7a68db141e3d4711e1a6f243a46e54c33d69fd53278ad37d41773e25fdfcc6f",
+        "byteCount": 696
+      }
+    },
+    {
+      "id": "language-flag",
+      "name": "Language Flag",
+      "version": "1.1",
+      "icon": "flag",
+      "summary": "Show the active language with Clink\u2019s bundled flag artwork",
+      "asset": {
+        "path": "language-flag.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/language-flag.clinkplugin",
+        "sha256": "c70abfd39665a25c9e0a22b6bbedbcd826879717973742eb5d5ebe98c43ded20",
+        "byteCount": 685
       }
     },
     {

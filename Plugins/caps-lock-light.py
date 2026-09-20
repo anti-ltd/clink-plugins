@@ -2,7 +2,7 @@
 # name: Caps Lock Light
 # icon: capslock
 # summary: A little green lamp on shift that lights while caps lock is on
-# version: 1.1
+# version: 1.2
 # author: Clink
 # ---
 
@@ -40,17 +40,20 @@ SIZE = 5      # the lamp's diameter, in points
 INSET = 5     # how far it sits from the key's top and right edges
 
 def initial():
-    return {"on": True, "color": "Green", "glow": True, "caps": False}
+    return {"on": True, "color": "Green", "glow": True, "caps": False,
+            "shift": False, "light_shift": False, "light_caps": True}
 
 def settings(state):
     return section("keys.faces", [
         toggle("Caps lock light", state["on"], action="on"),
+        toggle("Shift", state.get("light_shift", False), action="light_shift"),
+        toggle("Caps Lock", state.get("light_caps", True), action="light_caps"),
         segmented(list(COLORS.keys()), value=state["color"], key="color"),
         toggle("Glow", state["glow"], action="glow"),
     ], title="Caps Lock Light")
 
 def on_action(action, value, state):
-    if action in ("on", "glow"):
+    if action in ("on", "glow", "light_shift", "light_caps"):
         state[action] = value
     return state
 
@@ -60,8 +63,11 @@ def events(state):
 def on_event(name, info, state):
     if name == "shift":
         state["caps"] = info["state"] == "locked"
+        state["shift"] = info["state"] == "on"
     elif name == "open":
-        state["caps"] = context()["shift"] == "locked"
+        current = context()["shift"]
+        state["caps"] = current == "locked"
+        state["shift"] = current == "on"
     return state
 
 def mix(a, b, t):
@@ -76,7 +82,8 @@ def mix(a, b, t):
 def key_art(state):
     if not state["on"]:
         return {}
-    lit = state["caps"]
+    # Missing preferences keep saved states from earlier versions caps-only.
+    lit = (state.get("light_caps", True) and state["caps"]) or (state.get("light_shift", False) and state.get("shift", False))
     hue = COLORS.get(state["color"], COLORS["Green"])
     # The lamp's centre, measured from the key's top right corner.
     x = -(INSET + SIZE / 2)

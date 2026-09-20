@@ -16,6 +16,9 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 
 | Plugin | What it does |
 |---|---|
+| Language Flag | Uses Clink’s bundled MIT-licensed flag-icons artwork for the active language in any space bar corner. |
+| Language Emoji | Uses the active language’s regional flag emoji in any space bar corner. |
+| Language Badge | Shows the active language in the space bar corner, leaving the caption free. Uses the native plugin enable switch and follows the chosen language-code corner. Requires a Clink build supporting `space_language_text`. |
 | WPM Spacebar | Puts your live typing speed on the space bar. Its switch sits under Keys > Space bar in the app. |
 | WPM Sparkline | A graph of the last half minute of your typing speed, as a layout element. |
 | Clock | The time, with or without the date, as a layout element. 12- or 24-hour is set per element. |
@@ -28,7 +31,7 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Snowfall | An animated background: snow drifting behind the keys, with a puff of light from every key you press. |
 | Colemak-DH | The Colemak-DH layout, installed as an ordinary custom layout you can edit. |
 | Heavy Space | A heavier haptic on the space bar, a crisp one on return and a light one on delete. Its switch sits under Sound & Haptics. |
-| Caps Lock Light | A little green lamp in the top right of shift that lights while caps lock is on, and sits dark when it is off. Drawn entirely by the script with `key_art` and lit from `on_event`, so it doubles as the example for both. |
+| Caps Lock Light | A little green lamp in the top right of shift with separate Shift and Caps Lock switches: light it for either state or both. Caps Lock is selected by default. Drawn entirely by the script with `key_art` and lit from `on_event`, so it doubles as the example for both. |
 | Press Spark | A ring in the theme's accent colour around whichever key is down. The example for the `key_down` and `key_up` events. |
 | Adaptive Hitbox | Learns where you actually tap each key and moves its target toward it. Its switch sits under Keys > Hitboxes. |
 | Shorthand | Suggests "be right back" while you type brb (and a few more), can expand them on space, and keeps autocorrect off words in capitals and words with digits. |
@@ -99,6 +102,8 @@ Every hook gets `state` last and may return it changed. State is kept between ca
 
 On top of the panel commands (`insert`, `replace`, `haptic`, ...) a plugin has:
 
+- `space_language_flag(language)` uses Clink’s bundled flag-icons artwork; `space_language_emoji(language)` uses a regional flag emoji. Pass a language id such as `en_GB`, or `None` to restore native behavior. Custom emblems or a globe provide fallbacks. These share an exclusive badge slot with the text command: enabling one automatically disables the other badge plugins. Position all three through Keys → Space bar → Language code position, even with the native code switched off.
+- `space_language_text(text)` overrides the corner language badge (12 characters, `""` hides it, `None` restores native visibility/text). Uses the selected corner and leaves the caption alone.
 - `space_text(text)` to caption the space bar (32 characters, `None` hands it back).
 - `setting(name)` and `set_setting(name, value)` to read and change about a hundred of Clink's own settings, from `sound.enabled` to `theme` and `layout.one_handed`. Values are checked against the same ranges the app's controls use.
 - `claim(id)` and `release(id)` to take over one of those settings. Its card in the app says which plugin manages it, and the space bar caption field locks while claimed.
@@ -350,3 +355,11 @@ and also offers its built-in finishes. See `Plugins/typewriter.py` for a
 nickel bezel and dark platen knob matching the Typewriter cap. That cap uses
 `outline="rect"` without `corner=`, preserving the user's key dimensions and
 rounding.
+
+### Incompatibility metadata
+
+Add `# exclusiveResources: spacebar.language_badge` to a plugin header to
+reserve the corner badge. Multiple resource names can be comma-separated.
+Clink disables conflicting plugins when another is enabled or installed,
+without deleting their settings. The native badge commands imply the same
+resource for older packages; main-caption plugins such as WPM remain compatible.

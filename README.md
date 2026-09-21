@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/anti-ltd/clink-language-packs/main/icon-1024.png" width="96" alt="Clink app icon">
+  <img src="README-assets/clink-icon.png" width="96" alt="Clink app icon">
 </p>
 
 <h1 align="center">Clink plugins</h1>
@@ -283,9 +283,11 @@ state. Its destination and layout are ordinary Python code. Existing WPM
 plugins are unchanged.
 
 It is also the worked example of making a graph read as one. It spans the whole
-key short of the rounded corners, because key art is drawn over the cap rather
-than clipped to it and a wash that reached the edges would square them off. And
-it smooths the series twice before handing it over: a trailing average over the
+key: Clink clips key art to the cap, so a wash that reaches the edges follows
+the key's rounded corners rather than squaring them off. Its reading is drawn
+with `mono=True` and a `width`, anchored `right`, so the digits keep one width
+in a box that keeps one size and the number stays put as it counts. And it
+smooths the series twice before handing it over: a trailing average over the
 readings, which takes out the staircase a whole-word rate steps by, then a
 Catmull-Rom spline through them onto a fixed grid of 60 points, which rounds
 the corners between readings. The grid is fixed so that consecutive paths have

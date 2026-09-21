@@ -1,7 +1,7 @@
 # ---
 # name: Spacebar Graph
 # icon: chart.xyaxis.line
-# version: 1.1
+# version: 1.2
 # author: Clink
 # ---
 
@@ -17,6 +17,9 @@
 # hands over is smoothed twice: a trailing average over the readings, then a
 # spline through them onto a fixed grid of points. Both are here rather than
 # in the host, so any plugin can draw a graph that moves the same way.
+#
+# Requires a Clink build that clips key art to the cap, which is what lets the
+# graph reach the edges and still follow the key's rounded corners.
 
 # Readings kept, oldest first. Two dozen is about half a minute of ticks, and
 # less than that while words are landing between them.
@@ -113,19 +116,23 @@ def key_art(state):
     unit = UNITS.get(language, "WPM")
     drawing = []
     if len(history) > 1:
-        # The whole key, short of the rounded corners: art is drawn over the
-        # cap rather than inside it, so a wash that reached the edges would
-        # square them off.
+        # The whole key. The host clips key art to the cap, so the wash follows
+        # the rounded corners rather than squaring them off, and the baseline
+        # can sit on the bottom edge.
         drawing = graph(curved(averaged(history), DRAWN), min=0, max=top, unit="key",
-                        x=0, y=0, width=0.98, height=0.9,
+                        x=0, y=0, width=1, height=1,
                         stroke=color("text", 0.8), line_width=1.3,
                         # Strongest along the bottom, so the area under the
                         # line reads at any height the line sits at.
                         fill=gradient("linear", [color("text", 0.04), color("text", 0.2)],
                                       start=[0, 0], end=[0, 1]))
-    drawing.append(shape("text", unit="key", x=0.27, y=-0.22,
+    # Pinned to the right: a box of its own width, aligned in it to the side
+    # the anchor names, and monospaced digits. Placed by its centre with its
+    # own width instead, the reading would slide sideways every time it gained
+    # a digit.
+    drawing.append(shape("text", unit="key", anchor="right", x=-0.23, y=-0.22,
                          width=0.38, height=0.22, text=f"{rate} {unit}",
-                         font_size=9, weight="semibold", fill="text"))
+                         font_size=9, weight="semibold", mono=True, fill="text"))
     # A second: the beat the tick runs on, so the curve is still travelling
     # when the next reading arrives and never sits still between them.
     return {"space": art(drawing, animate=1.0)}

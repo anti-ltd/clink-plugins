@@ -225,14 +225,14 @@
     {
       "id": "spacebar-graph",
       "name": "Spacebar Graph",
-      "version": "1.1",
+      "version": "1.2",
       "icon": "chart.xyaxis.line",
       "summary": "",
       "asset": {
         "path": "spacebar-graph.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/spacebar-graph.clinkplugin",
-        "sha256": "d2a2565a9d6a39ae4c2d5ce403da23d13e56be220bba61d91bd736ca804f9935",
-        "byteCount": 5474
+        "sha256": "07701f412b2d44a30762f4aeaa5c77e354c29ad073986ae618b48ef1eb49e24e",
+        "byteCount": 5919
       }
     },
     {

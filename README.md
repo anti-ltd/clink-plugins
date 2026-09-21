@@ -20,6 +20,7 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Language Emoji | Uses the active language’s regional flag emoji in any space bar corner. |
 | Language Badge | Shows the active language in the space bar corner, leaving the caption free. Uses the native plugin enable switch and follows the chosen language-code corner. Requires a Clink build supporting `space_language_text`. |
 | WPM Spacebar | Puts your live typing speed on the space bar. Its switch sits under Keys > Space bar in the app. |
+| Spacebar Graph | A new Python plugin drawing a WPM sparkline and reading on space with the generic `graph()` helper. Requires a Clink build with `graph`. |
 | WPM Sparkline | A graph of the last half minute of your typing speed, as a layout element. |
 | Clock | The time, with or without the date, as a layout element. 12- or 24-hour is set per element. |
 | Light Show | Two lighting effects for the Effects page: Aurora, a slow wave through greens and blues with a twinkle on top, and Tempo, a wave that speeds up as you type faster. |
@@ -246,6 +247,39 @@ There is also `line_width`, `corner`, `trim_from`/`trim_to` (part of an
 outline, so an arc is a trimmed circle), `rotation`, `opacity`, `blur`, and
 `shadow=` with one `shadow(color, radius=, x=, y=)` or a list of up to three.
 A key holds sixteen shapes.
+
+### Graphs on keys
+
+`graph(values, ...)` returns a **list of ordinary shapes**. Python chooses the
+samples, target keys, placement and companion labels. It has no WPM or space-bar
+behavior built in. Combine its result with other shapes using `+`, then return
+it from `key_art` directly or wrap it in `art(..., animate=0.35)`.
+
+```python
+def key_art(state):
+    drawing = graph(state["history"], min=0, max=100,
+                    x=0, y=0.28, width=0.8, height=0.22,
+                    stroke="accent", fill=color("accent", 0.12))
+    return {"return": art(drawing, animate=0.35)}
+```
+
+The helper accepts `values` (oldest first), optional `min`/`max`, `anchor`,
+`unit`, `x`, `y`, `width`, `height`, `stroke`, `fill`, `line_width` and `opacity`.
+Defaults are a centered 0.8-by-0.25-key line in the theme accent, with an
+automatic vertical scale and no fill. Paints may be theme colors, explicit
+colors or gradients. Coordinates follow `shape`; use `unit="pt"` for points.
+
+It keeps the newest 60 samples. Empty and single-sample series draw nothing;
+constant series with equal bounds draw at mid-height. Explicit bounds clip
+outliers. Negative values are supported; nonnumeric/nonfinite samples,
+nonpositive dimensions and reversed bounds report an error. A filled graph
+uses two of a key's 16 shape slots, and an unfilled graph uses one.
+
+The separate **Spacebar Graph** plugin samples `stats()["wpm"]` once a second,
+keeps 30 readings, resets on open/close, and returns only `{"space": ...}`.
+Its WPM label reuses Clink's translated units. It uses the existing typing-data
+grant, changes no settings or text, and needs no saved state. Its destination
+and layout are ordinary Python code. Existing WPM plugins are unchanged.
 
 ### Events
 

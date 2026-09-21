@@ -1,6 +1,7 @@
 # ---
 # name: Spacebar Graph
 # icon: chart.xyaxis.line
+# summary: A sparkline of your recent typing speed, drawn on the space bar
 # version: 1.2
 # author: Clink
 # ---

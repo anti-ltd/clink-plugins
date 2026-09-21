@@ -67,6 +67,19 @@
       }
     },
     {
+      "id": "dino",
+      "name": "Dino",
+      "version": "1.0",
+      "icon": "hare",
+      "summary": "A runner on the space bar: hold to lift the dino over the cacti",
+      "asset": {
+        "path": "dino.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/dino.clinkplugin",
+        "sha256": "157e43273e051acccbc097359acf6e3e7e4b265b6472b382e36b0a82bc456cff",
+        "byteCount": 12401
+      }
+    },
+    {
       "id": "flick-gestures",
       "name": "Flick Gestures",
       "version": "2.0",
@@ -77,6 +90,32 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/flick-gestures.clinkplugin",
         "sha256": "f5670dee7c8e13e6bc3032e8e368f477c96958fa2cf2ea55ae9528c38fa1579e",
         "byteCount": 3772
+      }
+    },
+    {
+      "id": "hangman",
+      "name": "Hangman",
+      "version": "1.0",
+      "icon": "gamecontroller",
+      "summary": "Hangman on the space bar: the letter keys are your guesses",
+      "asset": {
+        "path": "hangman.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/hangman.clinkplugin",
+        "sha256": "1fbfbdeb1268a0c668e6ba8623476e3d504f6ad336f15bbb5b6f713c0e526c0b",
+        "byteCount": 12248
+      }
+    },
+    {
+      "id": "haptic-strength",
+      "name": "Haptic Strength",
+      "version": "1.0",
+      "icon": "hand.tap.fill",
+      "summary": "A knob in the top bar that sets how strong your key presses feel",
+      "asset": {
+        "path": "haptic-strength.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/haptic-strength.clinkplugin",
+        "sha256": "fce3bcf8fcee9e9a5ec4a9ec9fd15b84081a7ba5e57036d38690d068379f0a00",
+        "byteCount": 1797
       }
     },
     {
@@ -227,12 +266,12 @@
       "name": "Spacebar Graph",
       "version": "1.2",
       "icon": "chart.xyaxis.line",
-      "summary": "",
+      "summary": "A sparkline of your recent typing speed, drawn on the space bar",
       "asset": {
         "path": "spacebar-graph.clinkplugin",
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/spacebar-graph.clinkplugin",
-        "sha256": "07701f412b2d44a30762f4aeaa5c77e354c29ad073986ae618b48ef1eb49e24e",
-        "byteCount": 5919
+        "sha256": "c3c0fea11ddc8aaea409a49c639df3f48fa8c502fe3238a9252acd94a33dfcd1",
+        "byteCount": 5982
       }
     },
     {

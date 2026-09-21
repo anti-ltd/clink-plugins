@@ -20,7 +20,7 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Language Emoji | Uses the active language’s regional flag emoji in any space bar corner. |
 | Language Badge | Shows the active language in the space bar corner, leaving the caption free. Uses the native plugin enable switch and follows the chosen language-code corner. Requires a Clink build supporting `space_language_text`. |
 | WPM Spacebar | Puts your live typing speed on the space bar. Its switch sits under Keys > Space bar in the app. |
-| Spacebar Graph | A new Python plugin drawing a WPM sparkline and reading on space with the generic `graph()` helper. Requires a Clink build with `graph`. |
+| Spacebar Graph | A WPM sparkline and reading across the whole space bar, drawn with the generic `graph()` helper. Requires a Clink build with `graph`. |
 | WPM Sparkline | A graph of the last half minute of your typing speed, as a layout element. |
 | Clock | The time, with or without the date, as a layout element. 12- or 24-hour is set per element. |
 | Light Show | Two lighting effects for the Effects page: Aurora, a slow wave through greens and blues with a twinkle on top, and Tempo, a wave that speeds up as you type faster. |
@@ -275,11 +275,22 @@ outliers. Negative values are supported; nonnumeric/nonfinite samples,
 nonpositive dimensions and reversed bounds report an error. A filled graph
 uses two of a key's 16 shape slots, and an unfilled graph uses one.
 
-The separate **Spacebar Graph** plugin samples `stats()["wpm"]` once a second,
-keeps 30 readings, resets on open/close, and returns only `{"space": ...}`.
-Its WPM label reuses Clink's translated units. It uses the existing typing-data
-grant, changes no settings or text, and needs no saved state. Its destination
-and layout are ordinary Python code. Existing WPM plugins are unchanged.
+The separate **Spacebar Graph** plugin samples `stats()["wpm"]` on the tick and
+on every word, keeps 24 readings, resets on open/close, and returns only
+`{"space": ...}`. Its WPM label reuses Clink's translated units. It uses the
+existing typing-data grant, changes no settings or text, and needs no saved
+state. Its destination and layout are ordinary Python code. Existing WPM
+plugins are unchanged.
+
+It is also the worked example of making a graph read as one. It spans the whole
+key short of the rounded corners, because key art is drawn over the cap rather
+than clipped to it and a wash that reached the edges would square them off. And
+it smooths the series twice before handing it over: a trailing average over the
+readings, which takes out the staircase a whole-word rate steps by, then a
+Catmull-Rom spline through them onto a fixed grid of 60 points, which rounds
+the corners between readings. The grid is fixed so that consecutive paths have
+the same number of points for Clink to ease between over `animate`. All of it
+is ordinary Python; none of it is a `graph()` option.
 
 ### Events
 

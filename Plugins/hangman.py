@@ -294,16 +294,23 @@ def figure(parts, paint):
     return out
 
 
+# A shape is drawn inside a box of its own width and height, and a box with no
+# thickness is not drawn at all: the body, being straight up and down, is
+# exactly that. So every limb gets a box at least this wide, with the line
+# down the middle of the side that has no length of its own.
+THIN = 1.0
+
+
 def limb(u1, v1, u2, v2, paint):
     x1 = at_x(u1)
     y1 = at_y(v1)
     x2 = at_x(u2)
     y2 = at_y(v2)
-    px = 0.0 if x1 <= x2 else 1.0
-    py = 0.0 if y1 <= y2 else 1.0
+    px = 0.5 if abs(x2 - x1) < THIN else (0.0 if x1 < x2 else 1.0)
+    py = 0.5 if abs(y2 - y1) < THIN else (0.0 if y1 < y2 else 1.0)
     return shape("line", anchor="left", unit="pt",
                  x=(x1 + x2) / 2, y=(y1 + y2) / 2,
-                 width=abs(x2 - x1), height=abs(y2 - y1),
+                 width=max(abs(x2 - x1), THIN), height=max(abs(y2 - y1), THIN),
                  points=[[px, py], [1.0 - px, 1.0 - py]],
                  stroke=paint, line_width=1.8)
 

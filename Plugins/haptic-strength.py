@@ -14,16 +14,13 @@
 # step buzzes at the new strength, so you feel where it is before you let go,
 # and it saves when you do.
 #
-# The second knob is optional and turns the same screen's sharpness: low is a
-# soft thud, high is a crisp click. Place either one, or both.
-#
-# on_action hears where a knob stopped. All the way down switches key haptics
-# off for real, the way the volume knob switches sounds off, and turning it
-# back up switches them on again.
+# on_action hears where the knob stopped. All the way down switches key
+# haptics off for real, the way the volume knob switches sounds off, and
+# turning it back up switches them on again. How sharp the tap is stays where
+# you set it in Sound & Haptics; this knob is only how hard it hits.
 def bar_items(state):
     return [
         bar_knob("strength", "Haptic strength", icon="hand.tap.fill", setting="haptics.intensity"),
-        bar_knob("sharpness", "Haptic sharpness", icon="waveform.path", setting="haptics.sharpness"),
     ]
 
 def on_action(action, value, state):

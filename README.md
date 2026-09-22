@@ -37,11 +37,13 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Adaptive Hitbox | Learns where you actually tap each key and moves its target toward it. Its switch sits under Keys > Hitboxes. |
 | Shorthand | Suggests "be right back" while you type brb (and a few more), can expand them on space, and keeps autocorrect off words in capitals and words with digits. |
 | Switch Volume | A knob for the top bar that sets how loud your key presses are. Drag it and each step clicks at the new level. Add it from Layout > Top bar. |
-| Haptic Strength | A knob for the top bar that sets how strong your key presses feel, and a second one for sharpness. Drag it and every step buzzes at the new strength; all the way down switches haptics off. Add it from Layout > Top bar. |
+| Haptic Strength | A knob for the top bar that sets how strong your key presses feel. Drag it and every step buzzes at the new strength, and all the way down switches haptics off. Add it from Layout > Top bar. |
 | Swipe Trails | Six trails for swipe typing: Candy Ribbon (a pastel band that keeps flowing), Stardust, Love Letter (hearts), Laser, Stitches and Ink Brush. Pick one from Gestures > Swipe typing; your thickness, taper and trail-the-finger settings still shape it. |
 | Typewriter | A key and a popup drawn entirely in Python: round glass faces in chrome rings on stems, with bars for the wide keys, and a Typed Slip popup that strikes your letter on typing paper. Two themes for the Plugins tab of the theme gallery, Typewriter Ivory and Typewriter Noir, the key on its own for any theme, a deep Typebar press, a Strike letter animation, and clacky haptics with a heavy return. The haptics switch sits under Sound & Haptics. |
 | Hangman | Hangman played on the keys, and the example of a plugin that takes typing over. Type `hangman` anywhere (or tap a Hangman button placed from Layout > Top bar) to deal a word: the space bar shows the gallows, the word and a dot per life, a guessed letter washes its own key green and a wrong one red. The letters you press are guesses, not typing — the script takes each one back out of the field. Space deals the next word, delete leaves, and with its switch off the script is never called on a keystroke at all. |
-| Dino | A side-scroller on the space bar. Type `dino` (or tap a Dino button from Layout > Top bar) to start, then hold the space bar to lift the dino over the cacti and let go to drop; hold longer to go higher. The world is measured in the key itself, so it fits any space bar, and the script mirrors the keyboard's own easing curve so a crash is judged against the drawing rather than an ideal position nobody saw. The score is the caption; your best is kept. |
+| Dino | A side-scroller on the space bar, and the example of layered key art. Type `dino` (or tap a Dino button from Layout > Top bar) to start, then tap the space bar to jump and hold it to jump higher. The world scrolls on a `linear` layer aimed further ahead than a tick is long, so it neither stalls nor gallops, while the dino hops on a layer of its own a fifth of a second long — one duration could not do both. Measured in key widths and heights so it fits any space bar, with crashes judged against the drawing rather than an ideal position nobody saw. Needs a Clink build with layered key art. |
+| Mood Ring | A wash of colour over the keys that warms or cools with what you are writing. Warm and cold word lists move a running mood, with "not" flipping the next word and "really" doubling it, and the colour is mixed between the two ends rather than picked from a short list, so it drifts instead of stepping. Pure `key_art`: it never touches your theme, and switching it off leaves the keyboard exactly as it was. |
+| Prose Metronome | A bar along the bottom of the space key that fills as a sentence runs long. Set a target in words, and the bar goes amber at it and red a third past, where a second bar grows above the first. The last few sentence lengths are listed under the slider so the target can be set to the writing you are actually doing. A knob for Layout > Top bar moves the target mid-draft, and an optional banner says something once per sentence. |
 
 The files live in [`Plugins/`](Plugins). Each one is an ordinary Python file, readable in one sitting, that starts with a short header:
 
@@ -233,7 +235,20 @@ password field. The first plugin to answer something other than `None` wins.
 
 `key_art(state)` draws on the keys. It returns a dict from key names (the same
 ones `haptics` uses, `"letters"` and `"keys"` included) to a list of shapes,
-one shape, or `art([...], animate=seconds)` to ease between changes.
+one shape, or `art([...], animate=seconds, curve=...)` to ease between changes.
+`curve` is `"ease_out"` (the default), `"linear"`, `"ease_in"`, `"ease_in_out"`
+or `"spring"`.
+
+A key can take a list of `art(...)` entries instead, and then each one is a
+layer with its own duration and curve. That is the only way to move two things
+on one key at different speeds, since a layer animates as a whole: Dino scrolls
+its world on a long linear layer and hops the dino on a short eased one. The
+sixteen-shape limit is per key, across all of its layers.
+
+A shape is drawn inside a box of its own width and height, and a box with no
+thickness paints nothing. A straight line needs a little width or height of its
+own with its points down the middle of that side, such as `height=0.03,
+points=[[0, 0.5], [1, 0.5]]`, or it will not appear at all.
 
 `shape(kind, ...)` is the one drawing builder. `kind` is `"circle"`, `"rect"`,
 `"capsule"`, `"line"`, `"path"`, `"text"` or `"icon"`. A shape sits at an

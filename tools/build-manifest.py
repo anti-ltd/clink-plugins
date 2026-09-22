@@ -83,9 +83,19 @@ for path in sorted(files):
     seen[path.stem] = path.name
     (build / f"{path.stem}.clinkplugin").write_bytes(data)
 
+# Each distinct set of bytes gets a permanent release URL. A cached manifest
+# must never point at a newer file with a different checksum: a client that
+# read the catalog before a release still installs the bytes it was promised.
+# Only the release tag is content-addressed; a plugin keeps the version its
+# author wrote, which is what the app compares to offer an update.
+release = "plugins-" + hashlib.sha256(json.dumps(
+    [(p.name, hashlib.sha256(p.read_bytes()).hexdigest())
+     for p in sorted(build.glob("*.clinkplugin")) if not p.name.startswith("._")],
+    separators=(",", ":")).encode()).hexdigest()
+
 plugins = []
 for path in sorted(p for p in build.glob("*.clinkplugin") if not p.name.startswith("._")):
     data = path.read_bytes(); plugin = json.loads(data)
-    plugins.append({"id": path.stem, "name": plugin["name"], "version": plugin.get("version", "latest"), "icon": plugin.get("icon", ""), "summary": plugin.get("summary", ""), "asset": {"path": path.name, "url": f"https://github.com/{repo}/releases/download/latest/{path.name}", "sha256": hashlib.sha256(data).hexdigest(), "byteCount": len(data)}})
-(root / "manifest.json").write_text(json.dumps({"version": "latest", "plugins": plugins}, indent=2) + "\n")
+    plugins.append({"id": path.stem, "name": plugin["name"], "version": plugin.get("version", release), "icon": plugin.get("icon", ""), "summary": plugin.get("summary", ""), "asset": {"path": path.name, "url": f"https://github.com/{repo}/releases/download/{release}/{path.name}", "sha256": hashlib.sha256(data).hexdigest(), "byteCount": len(data)}})
+(root / "manifest.json").write_text(json.dumps({"version": release, "plugins": plugins}, indent=2) + "\n")
 print(f"Packed {len(plugins)} plugins into build/")

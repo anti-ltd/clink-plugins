@@ -1,5 +1,5 @@
 {
-  "version": "latest",
+  "version": "plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6",
   "plugins": [
     {
       "id": "adaptive-hitbox",
@@ -9,7 +9,7 @@
       "summary": "Moves each key's target toward where you actually tap it",
       "asset": {
         "path": "adaptive-hitbox.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/adaptive-hitbox.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/adaptive-hitbox.clinkplugin",
         "sha256": "830c58b58ede313f0603415f5a039e376dfdae22038e75e390651fd7d4416e3d",
         "byteCount": 2822
       }
@@ -22,7 +22,7 @@
       "summary": "A round popup that floats a little higher",
       "asset": {
         "path": "bubble-popups.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/bubble-popups.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/bubble-popups.clinkplugin",
         "sha256": "134353c1a758a7b9ea9dcf089707c8422ebcbca3cbd34c8958f6c98c71812df8",
         "byteCount": 974
       }
@@ -35,7 +35,7 @@
       "summary": "A little green lamp on shift that lights while caps lock is on",
       "asset": {
         "path": "caps-lock-light.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/caps-lock-light.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/caps-lock-light.clinkplugin",
         "sha256": "28f5eec4eef4c7791179a3232b98dc21d3656370240b726f17bd9d875c4c05a4",
         "byteCount": 5197
       }
@@ -48,7 +48,7 @@
       "summary": "The time on a key, for a custom layout",
       "asset": {
         "path": "clock.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/clock.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/clock.clinkplugin",
         "sha256": "20c5abc943be16237e42feff157e95eb1edabaa62a98c454ce29aec4bec19390",
         "byteCount": 1802
       }
@@ -61,7 +61,7 @@
       "summary": "The Colemak-DH layout, installed as a custom layout",
       "asset": {
         "path": "colemak-dh.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/colemak-dh.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/colemak-dh.clinkplugin",
         "sha256": "818c6a6f8811c54b750f4cac822f57c4cc18a44392eecec2718a3d82b34ab776",
         "byteCount": 1148
       }
@@ -69,14 +69,14 @@
     {
       "id": "dino",
       "name": "Dino",
-      "version": "1.0",
+      "version": "2.0",
       "icon": "hare",
-      "summary": "A runner on the space bar: hold to lift the dino over the cacti",
+      "summary": "A runner on the space bar: tap to jump the dino over the cacti",
       "asset": {
         "path": "dino.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/dino.clinkplugin",
-        "sha256": "157e43273e051acccbc097359acf6e3e7e4b265b6472b382e36b0a82bc456cff",
-        "byteCount": 12401
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/dino.clinkplugin",
+        "sha256": "683b1d9f27b656f2895e4f91fcea84e816760da89fb3d07a2f64d8c5cdf91da7",
+        "byteCount": 13869
       }
     },
     {
@@ -87,7 +87,7 @@
       "summary": "Flick to delete a word, type a space or pick a suggestion",
       "asset": {
         "path": "flick-gestures.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/flick-gestures.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/flick-gestures.clinkplugin",
         "sha256": "f5670dee7c8e13e6bc3032e8e368f477c96958fa2cf2ea55ae9528c38fa1579e",
         "byteCount": 3772
       }
@@ -100,9 +100,9 @@
       "summary": "Hangman on the space bar: the letter keys are your guesses",
       "asset": {
         "path": "hangman.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/hangman.clinkplugin",
-        "sha256": "1fbfbdeb1268a0c668e6ba8623476e3d504f6ad336f15bbb5b6f713c0e526c0b",
-        "byteCount": 12248
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/hangman.clinkplugin",
+        "sha256": "eb5285ee72007d6640d3694d86c8f7bb44d189b79ae9b4c33e10a2281713ddb5",
+        "byteCount": 12645
       }
     },
     {
@@ -113,9 +113,9 @@
       "summary": "A knob in the top bar that sets how strong your key presses feel",
       "asset": {
         "path": "haptic-strength.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/haptic-strength.clinkplugin",
-        "sha256": "fce3bcf8fcee9e9a5ec4a9ec9fd15b84081a7ba5e57036d38690d068379f0a00",
-        "byteCount": 1797
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/haptic-strength.clinkplugin",
+        "sha256": "2fd2c3c1fab33bc1a0fa3bb84fb1a62c959ee31f05d13b173562261ed20a9912",
+        "byteCount": 1645
       }
     },
     {
@@ -126,7 +126,7 @@
       "summary": "A heavier haptic on space, and its own feel for return and delete",
       "asset": {
         "path": "heavy-space.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/heavy-space.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/heavy-space.clinkplugin",
         "sha256": "14ef0c65cee320e5de40592309f8be377cdec6428a6ae6abfdd63440ad601fb7",
         "byteCount": 1568
       }
@@ -139,7 +139,7 @@
       "summary": "Show the active language in the corner of the space bar",
       "asset": {
         "path": "language-badge.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/language-badge.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/language-badge.clinkplugin",
         "sha256": "7d027935f1479b45ab909f3bde97a5541c3716098d7d9539329d2d1faaaf9b2a",
         "byteCount": 759
       }
@@ -152,7 +152,7 @@
       "summary": "Show the active language as a flag emoji on the space bar",
       "asset": {
         "path": "language-emoji.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/language-emoji.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/language-emoji.clinkplugin",
         "sha256": "b7a68db141e3d4711e1a6f243a46e54c33d69fd53278ad37d41773e25fdfcc6f",
         "byteCount": 696
       }
@@ -165,7 +165,7 @@
       "summary": "Show the active language with Clink\u2019s bundled flag artwork",
       "asset": {
         "path": "language-flag.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/language-flag.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/language-flag.clinkplugin",
         "sha256": "c70abfd39665a25c9e0a22b6bbedbcd826879717973742eb5d5ebe98c43ded20",
         "byteCount": 685
       }
@@ -178,7 +178,7 @@
       "summary": "Two lighting effects for the Effects page",
       "asset": {
         "path": "light-show.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/light-show.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/light-show.clinkplugin",
         "sha256": "cbee94a8d0b973b92d802c235a1ceccd6cd5b121d0a2b46d68b4a23fdadb8f88",
         "byteCount": 1712
       }
@@ -191,7 +191,7 @@
       "summary": "An example that adjusts the built-in mechanical key style",
       "asset": {
         "path": "low-profile-mod.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/low-profile-mod.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/low-profile-mod.clinkplugin",
         "sha256": "68b3c72ce351e8448ce4f7617a2f616813854e10c8cc73be9349ee1308b1bb29",
         "byteCount": 900
       }
@@ -204,9 +204,22 @@
       "summary": "A low-profile mechanical key style for the theme editor",
       "asset": {
         "path": "low-profile.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/low-profile.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/low-profile.clinkplugin",
         "sha256": "f6ad069bb1e9a7d2afe0f478bd50bc00501bc144327ab0540eb8e8895366416d",
         "byteCount": 2876
+      }
+    },
+    {
+      "id": "mood-ring",
+      "name": "Mood Ring",
+      "version": "1.0",
+      "icon": "drop.halffull",
+      "summary": "The keys take on the colour of what you are writing",
+      "asset": {
+        "path": "mood-ring.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/mood-ring.clinkplugin",
+        "sha256": "7d5d3972389e1d46904ce4a1c505e6055c2b89f8d5d72d3e3bbfb780e7a94a22",
+        "byteCount": 9681
       }
     },
     {
@@ -217,7 +230,7 @@
       "summary": "An entrance, a key press, a letter bounce and a page switch",
       "asset": {
         "path": "motion-kit.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/motion-kit.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/motion-kit.clinkplugin",
         "sha256": "ec4b8d0b6089b004d531708ec0ba563cf68130f6e65b00a588f86ac72968ea4c",
         "byteCount": 1821
       }
@@ -230,9 +243,22 @@
       "summary": "A ring in the theme's accent colour around whichever key is down",
       "asset": {
         "path": "press-spark.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/press-spark.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/press-spark.clinkplugin",
         "sha256": "cbd2afb833bd7cb3e990003503c61ba4ac8ab6ade5cb906ce31774fa4e276611",
         "byteCount": 1718
+      }
+    },
+    {
+      "id": "prose-metronome",
+      "name": "Prose Metronome",
+      "version": "1.0",
+      "icon": "metronome",
+      "summary": "A bar across the space key that fills as a sentence runs long",
+      "asset": {
+        "path": "prose-metronome.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/prose-metronome.clinkplugin",
+        "sha256": "5419fca1ddc03aecec1560c790519d22a751cbf06c2f3e13973a37964ff5a59e",
+        "byteCount": 7403
       }
     },
     {
@@ -243,7 +269,7 @@
       "summary": "Suggests and expands shorthand, and keeps autocorrect off capitals and numbers",
       "asset": {
         "path": "shorthand.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/shorthand.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/shorthand.clinkplugin",
         "sha256": "2481d060ad955b2a54aad67482a1c9a5cb44c1132b3c4eaee0ad5da32b1fabbf",
         "byteCount": 2097
       }
@@ -256,7 +282,7 @@
       "summary": "Snow drifting behind the keys, with a puff from every key you press",
       "asset": {
         "path": "snowfall.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/snowfall.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/snowfall.clinkplugin",
         "sha256": "d01e714f6aefad56823ac870d5ea111c8085d336d3fabe6eaa9e1ea6cd8e7053",
         "byteCount": 1780
       }
@@ -269,7 +295,7 @@
       "summary": "A sparkline of your recent typing speed, drawn on the space bar",
       "asset": {
         "path": "spacebar-graph.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/spacebar-graph.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/spacebar-graph.clinkplugin",
         "sha256": "c3c0fea11ddc8aaea409a49c639df3f48fa8c502fe3238a9252acd94a33dfcd1",
         "byteCount": 5982
       }
@@ -282,7 +308,7 @@
       "summary": "Six trails for swipe typing, from a candy ribbon to a line of hearts",
       "asset": {
         "path": "swipe-trails.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/swipe-trails.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/swipe-trails.clinkplugin",
         "sha256": "4822c355d8213870a7ef13fdb042c9c66ecb90cac89fcf15160e44acf97bb957",
         "byteCount": 4784
       }
@@ -295,7 +321,7 @@
       "summary": "A knob in the top bar that sets how loud your key presses are",
       "asset": {
         "path": "switch-volume.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/switch-volume.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/switch-volume.clinkplugin",
         "sha256": "17a0e89932f720758c25d9837e8dc8f9a0158878a9bbde76fd8bb1d62a86f4c4",
         "byteCount": 1485
       }
@@ -308,7 +334,7 @@
       "summary": "Typewriter keys, a light and a dark theme, a typebar press and clacky haptics",
       "asset": {
         "path": "typewriter.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/typewriter.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/typewriter.clinkplugin",
         "sha256": "7035f2bc516bd4d5e10f4bff68ddc882c2da22f27a45bd3ae201f99654b5f52b",
         "byteCount": 9306
       }
@@ -321,7 +347,7 @@
       "summary": "Show your typing speed on the space bar",
       "asset": {
         "path": "wpm-spacebar.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-spacebar.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/wpm-spacebar.clinkplugin",
         "sha256": "7a87fe3e8c1c07c529c3166e69d370a1a6b07882378c2091806ca426c1702bc5",
         "byteCount": 1648
       }
@@ -334,7 +360,7 @@
       "summary": "A live graph of your typing speed, as a layout element",
       "asset": {
         "path": "wpm-sparkline.clinkplugin",
-        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/latest/wpm-sparkline.clinkplugin",
+        "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-c75b9a6c14e804cc199511eb3fcb1ee55c35cebc0dd32eff594bc797acc56fa6/wpm-sparkline.clinkplugin",
         "sha256": "bd5ade56189006d001065f9a427d8e80c23f833c67a38f6177e23966582b124a",
         "byteCount": 1853
       }

@@ -16,6 +16,7 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 
 | Plugin | What it does |
 |---|---|
+| Language Switcher | Choose space-bar swipe directions to cycle enabled languages. Keeps the language code visible while enabled, without changing the saved badge preference. Left/right start on; upward directions are optional. In updated Clink builds, use a quick flick to switch languages or a slower, sustained drag to move the cursor. Holding briefly before dragging also chooses cursor control. Requires a Clink build with `space_swipes`; the cursor-conflict fix requires an app update. |
 | Language Flag | Uses Clink’s bundled MIT-licensed flag-icons artwork for the active language in any space bar corner. |
 | Language Emoji | Uses the active language’s regional flag emoji in any space bar corner. |
 | Language Badge | Shows the active language in the space bar corner, leaving the caption free. Uses the native plugin enable switch and follows the chosen language-code corner. Requires a Clink build supporting `space_language_text`. |
@@ -44,6 +45,7 @@ A plugin hooks into typing and can drive the keyboard's own controls. It draws i
 | Dino | A side-scroller on the space bar, and the example of layered key art. Type `dino` (or tap a Dino button from Layout > Top bar) to start, then tap the space bar to jump and hold it to jump higher. The world scrolls on a `linear` layer aimed further ahead than a tick is long, so it neither stalls nor gallops, while the dino hops on a layer of its own a fifth of a second long — one duration could not do both. Measured in key widths and heights so it fits any space bar, with crashes judged against the drawing rather than an ideal position nobody saw. Needs a Clink build with layered key art. |
 | Mood Ring | A wash of colour over the keys that warms or cools with what you are writing. Warm and cold word lists move a running mood, with "not" flipping the next word and "really" doubling it, and the colour is mixed between the two ends rather than picked from a short list, so it drifts instead of stepping. Pure `key_art`: it never touches your theme, and switching it off leaves the keyboard exactly as it was. |
 | Prose Metronome | A bar along the bottom of the space key that fills as a sentence runs long. Set a target in words, and the bar goes amber at it and red a third past, where a second bar grows above the first. The last few sentence lengths are listed under the slider so the target can be set to the writing you are actually doing. A knob for Layout > Top bar moves the target mid-draft, and an optional banner says something once per sentence. |
+| NuKey Themes | A page in the app for browsing themes people share from NuKey: a grid (or list) of previews with search, newest / most downloaded / most liked, and a download button that opens Clink's NuKey import sheet. It shows up on the plugin's page and under the theme picker. It is the example for plugin pages and `fetch`, and the one plugin that asks for Network access, to `nukey-themes.ske-d03.workers.dev` only. Needs a Clink build with plugin pages. |
 
 The files live in [`Plugins/`](Plugins). Each one is an ordinary Python file, readable in one sitting, that starts with a short header:
 
@@ -76,7 +78,8 @@ A plugin script may define any of these functions:
 | `on_language(code, state)` | The typing language changed, for example to `"de"`. |
 | `on_field(kind, state)` | The keyboard moved to a different kind of field: `"default"`, `"email"`, `"url"`, `"number"`, `"phone"`, `"search"` or `"password"`. |
 | `on_tick(state)` | Once a second while the keyboard is on screen, whether or not anything is being typed. |
-| `on_swipe(direction, state)` | A flick that started on a letter key: `"left"`, `"right"`, `"up"`, `"up_left"` or `"up_right"`. Only while swipe typing is off. |
+| `space_swipes(state)` | Opt into selected space-bar flicks with a list of `left`, `right`, `up`, `up_left`, `up_right`. Requires `on_swipe(key, direction, state)`; that hook receives `key="space"`. Works with swipe typing enabled. A space has not been inserted: never delete a provisional character. |
+| `on_swipe(direction, state)` | A flick that started on a letter key: `"left"`, `"right"`, `"up"`, `"up_left"` or `"up_right"`. Only while swipe typing is off. Declare `on_swipe(key, direction, state)` instead to be told the lowercase letter it started on. |
 | `elements(state)` | What this plugin offers a custom layout. Return `element(id, name, icon=, width=, options=)` entries. |
 | `draw(id, state)` | One element's face, as a node tree. `sparkline(values, min=, max=, fill=)` is the node built for a key. |
 | `draw(id, options, state)` | The same, for an element with options: `options` holds what was picked on that key. |
@@ -116,6 +119,9 @@ On top of the panel commands (`insert`, `replace`, `haptic`, ...) a plugin has:
 - `suggest(words)` to put up to ten words in the suggestion bar, and `banner(text)` for a short message over it.
 - `press(key)` to run the keyboard's own `"space"` or `"delete"` key. A pressed space autocorrects the word before it, which `insert(" ")` doesn't.
 - `pick_suggestion(slot)` to take the suggestion chip under the `"left"`, `"center"` or `"right"` third of the bar, exactly as a tap on it would.
+- `select(start, end)` to select text. Positions count characters from where the selection starts (the caret when nothing is selected): negative reaches back into `context()["before"]`, and `len(context()["selected"])` is where the selection ends. `select(-3, 0)` takes the three characters before the caret, `select(0, len(selected) + 1)` grows a selection one to the right, and equal values just move the caret.
+- `select_word()` for the word at the caret, and `select_all()` for everything `context()` can see of the field (on a very long document iOS may not show a keyboard all of it).
+- `cut()` to copy the selection and delete it. It needs Clipboard access and does nothing without a selection. Copy is `copy(context()["selected"])` and paste is `insert(context()["clipboard"])`.
 - `stats()` for the live typing rate and totals.
 
 In the app, Home > More > Developer lists every id with what it accepts, and Show ids badges each settings card with the anchor `section(...)` takes.
@@ -166,7 +172,7 @@ per frame: a look is only numbers and words.
 
 | Builder | Where it shows | Keywords |
 |---|---|---|
-| `key_style(id, name)` | Theme editor, Style card. Applied to the theme being edited. | `cap`, a `cap(...)` that draws the whole key (see Drawn keys below), or `material` (`solid`, `empty`, `metal`, `3d`, `classic`, `slab`, `gamepad`, `liquidIce`, `molten`, `eink`), `variant` (`retro`, `modern`, `mechanical`, `mechanicalSwitches`, `berry`), `shape` (`rect`, `fret`, `berry`, `bevel`, `dome`), `glass`, `fan`, `inner_radius`, `face_inset`, `edges`, `raised`, `light_angle`, `shadow` (0 is flat), `shadow_radius`, `shadow_y`, `outline`, `outline_opacity` |
+| `key_style(id, name)` | Theme editor, Style card. Applied to the theme being edited. | `cap`, a `cap(...)` that draws the whole key (see Drawn keys below), or `material` (`solid`, `empty`, `metal`, `3d`, `classic`, `slab`, `gamepad`, `liquidIce`, `molten`, `eink`), `variant` (`retro`, `modern`, `mechanical`, `mechanicalSwitches`, `berry`), `shape` (`rect`, `fret`, `berry`, `bevel`, `dome`, `hex`, `hexFlat`, `circle`, `capsule`, `diamond`, `pentagon` — every shape but `rect` lets rows tuck into each other as far as the outlines allow; `hex` is the honeycomb), `glass`, `fan`, `inner_radius`, `face_inset`, `edges`, `raised`, `light_angle`, `shadow` (0 is flat), `shadow_radius`, `shadow_y`, `outline`, `outline_opacity` |
 | `theme(id, name)` | Themes, Plugins tab. Installed as a theme of your own when picked. | `background`, `keys` and `key_text` (required), `background_bottom` to fade the background, `special`, `special_text`, `accent`, all `"#rrggbb"`; `dark`; `font` (`default`, `rounded`, `serif`, `monospaced`, `avenir`, `georgia`, `futura`, `typewriter`, `copperplate`, `chalkboard`, `marker`, `script`); `weight` (`thin` to `black`); `style`, a `key_style(...)` for the finish |
 | `popup_style(id, name)` | Look > Popups | `shape` (`tile`, `round`, `balloon`), `width`, `height`, `lift`, `font_size`, `corner`, `opacity`, `response`, `damping`, or `cap=` to draw the body yourself with a `cap(...)` (see Drawn keys) and `ink=` for the letter's colour or gradient |
 | `entrance(id, name)` | Look > Entrance | Where the keyboard starts: `opacity`, `x`, `y`, `scale`, `tilt`, `spin`, plus `anchor` (`bottom`, `center`, `top`), `response`, `damping` |
@@ -371,8 +377,77 @@ If a plugin asks for anything in `on_swipe`, the keyboard takes that letter
 back out and then runs what was asked for, so `delete_word()` removes the word
 you were typing rather than a stray letter. If no plugin asks for anything, the
 flick stays an ordinary keystroke. That is how a plugin with its switch off
-stays out of the way: return `state` without calling anything. The letter is
-still in `context()` while the hook runs.
+stays out of the way: return `state` without calling anything.
+
+While the hook runs, `context()` shows the field as it was before the letter
+landed. If text was selected, the letter replaced it on landing; the keyboard
+puts the selection back, still highlighted, before running what was asked
+for, so one hook can give letters editing gestures:
+
+```python
+def on_swipe(key, direction, state):
+    if direction != "up":
+        return state
+    c = context()
+    if key == "a":
+        select_all()
+    elif key == "w":
+        select_word()
+    elif key == "c" and c["selected"]:
+        copy(c["selected"])
+    elif key == "x" and c["selected"]:
+        cut()
+    elif key == "v" and c["clipboard"]:
+        insert(c["clipboard"])
+    return state
+```
+
+Each branch asks for nothing when there is nothing to act on, so a C or X
+flick with no selection stays an ordinary keystroke.
+
+### Pages
+
+A plugin can add whole screens to the app, such as a store to browse. `pages(state)`
+returns `page(id, title, icon=, summary=, anchor=, listed=True)` entries, one for
+every page. The plugin's own page in Clink opens straight onto the first listed
+page (the rest are in its Manage menu), and a listed page is also a row on the
+settings card named by `anchor` (for example `"themes.theme"`) if you give one.
+Use `listed=False` for a page that is only opened with `navigate`, such as a
+theme's detail page. `page_view(id, params, state)` draws a page;
+`page_view(id, state)` also works if the page takes no params. It uses every
+settings builder plus the page nodes:
+
+| Builder | What it is |
+|---|---|
+| `screen(children, title=, search=, search_placeholder=, search_action=, toolbar=[...], refresh=)` | The page root. `search` names the state key the search field writes, `search_action` runs on Return, `toolbar` holds up to four `button(...)`s, `refresh` is the pull-to-refresh action |
+| `grid(children, columns=2)` | Real columns on a page |
+| `tile(children, action=, value=)` | A card that is one button |
+| `image(url, aspect=, width=, height=, fit="fill", radius=, action=)` | A picture from one of the plugin's `network` hosts |
+| `spinner(label)` / `empty(title, subtitle, icon=, action=, label=)` | Loading, and nothing to show (with an optional retry button) |
+| `loader(action, value=)` | Runs `on_action(action, value, state)` once when it scrolls into view, so a list can fetch its next batch |
+
+`on_page(id, params, state)` runs once when a page opens. From `on_action`,
+`navigate(page, params)` opens another of the plugin's pages, `back()` goes
+back, `open_url(url)` opens an https link, `install_theme(theme(...), apply=False)`
+adds a theme, and `import_theme(url, format="nukey")` downloads a `.nukeytheme`
+(or a `.clinktheme` with `format="clink"`) and shows the usual import sheet.
+
+To reach the internet, list the hosts in the header and ask for them on the
+consent sheet:
+
+```python
+# network: api.example.com, *.cdn.example.com
+```
+
+`fetch(id, url, method="GET", headers=, json=, body=, format="json")` then
+queues a request. It returns nothing. When the request finishes,
+`on_response(id, response, state)` gets `ok`, `status`, `data` (the parsed
+JSON), `text`, `error` and `headers`, and the page redraws. You can fetch from
+`on_page`, `on_response` and `on_action`, but never from the keyboard. Only
+https to a declared host works, redirects included, up to 4 MB per response
+and six at a time. Keep fetched lists in state keys that start with `_`. Those
+stay in memory and are never saved, so they don't push the plugin's saved
+state over its size limit.
 
 The full reference is at [clinkkeys.app/docs/plugins](https://clinkkeys.app/docs/plugins/).
 

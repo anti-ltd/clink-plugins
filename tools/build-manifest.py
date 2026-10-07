@@ -20,7 +20,7 @@ import hashlib, json, os, pathlib, sys
 
 root = pathlib.Path(__file__).resolve().parents[1]
 repo = os.environ.get("GITHUB_REPOSITORY", "anti-ltd/clink-plugins")
-fields = ["name", "icon", "summary", "version", "author", "enabled", "exclusiveResources"]
+fields = ["name", "icon", "summary", "version", "author", "enabled", "exclusiveResources", "network"]
 
 
 def fail(path, message):
@@ -61,6 +61,15 @@ def pack(path):
     }
     if meta.get("exclusiveResources"):
         plugin["exclusiveResources"] = [value.strip() for value in meta["exclusiveResources"].split(",") if value.strip()]
+    # The hosts a plugin's pages may fetch from and load pictures from, shown
+    # on the consent sheet. Host names only: "api.example.com" or
+    # "*.example.com", no scheme or path. Clink drops anything else.
+    if meta.get("network"):
+        hosts = [value.strip().lower() for value in meta["network"].split(",") if value.strip()]
+        for host in hosts:
+            if "/" in host or ":" in host or host.count(".") < 1:
+                fail(path, f"network host '{host}' should be a host name like api.example.com or *.example.com")
+        plugin["network"] = hosts
     return (json.dumps(plugin, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
 
 

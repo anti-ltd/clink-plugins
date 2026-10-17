@@ -430,7 +430,7 @@ settings builder plus the page nodes:
 `navigate(page, params)` opens another of the plugin's pages, `back()` goes
 back, `open_url(url)` opens an https link, `install_theme(theme(...), apply=False)`
 adds a theme, and `import_theme(url, format="nukey")` downloads a `.nukeytheme`
-(or a `.clinktheme` with `format="clink"`) and shows the usual import sheet.
+(a `.clinktheme` with `format="clink"`, or a `.keyboard2theme` with `format="keyboard2"`) and shows the usual import sheet on iOS and Android.
 
 To reach the internet, list the hosts in the header and ask for them on the
 consent sheet:
@@ -503,3 +503,11 @@ reserve the corner badge. Multiple resource names can be comma-separated.
 Clink disables conflicting plugins when another is enabled or installed,
 without deleting their settings. The native badge commands imply the same
 resource for older packages; main-caption plugins such as WPM remain compatible.
+
+## Platform availability
+
+`platforms.json` sets the default platform for packs in this repository and optional overrides keyed by pack ID (language code or locale for language packs). Use `ios`, `android`, or `both`. The manifest builder writes `platform` on every entry; older entries without it mean `both`. Platform targeting affects repository discovery and downloads, not the portable format of a person’s own exported content.
+
+### Keyboard2 gallery testing
+
+`Plugins/keyboard2-themes.py` is an unpublished debug-shelf plugin on iOS and Android. It discovers the current catalogue from `https://keyboard2.eu/gallery`, supports search and paging, and hands downloads to `import_theme(url, format="keyboard2")`. This format accepts an HTTPS `.keyboard2theme` file URL; only `format="clink"` accepts a document dictionary. Imported Keyboard2 themes use the ordinary preview and confirmation flow. Keep this plugin out of the published manifest until testing is approved.

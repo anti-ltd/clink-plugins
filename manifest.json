@@ -12,7 +12,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/adaptive-hitbox.clinkplugin",
         "sha256": "830c58b58ede313f0603415f5a039e376dfdae22038e75e390651fd7d4416e3d",
         "byteCount": 2822
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "bubble-popups",
@@ -25,7 +26,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/bubble-popups.clinkplugin",
         "sha256": "134353c1a758a7b9ea9dcf089707c8422ebcbca3cbd34c8958f6c98c71812df8",
         "byteCount": 974
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "caps-lock-light",
@@ -38,7 +40,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/caps-lock-light.clinkplugin",
         "sha256": "28f5eec4eef4c7791179a3232b98dc21d3656370240b726f17bd9d875c4c05a4",
         "byteCount": 5197
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "clock",
@@ -51,7 +54,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/clock.clinkplugin",
         "sha256": "20c5abc943be16237e42feff157e95eb1edabaa62a98c454ce29aec4bec19390",
         "byteCount": 1802
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "colemak-dh",
@@ -64,7 +68,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/colemak-dh.clinkplugin",
         "sha256": "818c6a6f8811c54b750f4cac822f57c4cc18a44392eecec2718a3d82b34ab776",
         "byteCount": 1148
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "dino",
@@ -77,7 +82,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/dino.clinkplugin",
         "sha256": "683b1d9f27b656f2895e4f91fcea84e816760da89fb3d07a2f64d8c5cdf91da7",
         "byteCount": 13869
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "flick-gestures",
@@ -90,7 +96,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/flick-gestures.clinkplugin",
         "sha256": "f5670dee7c8e13e6bc3032e8e368f477c96958fa2cf2ea55ae9528c38fa1579e",
         "byteCount": 3772
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "hangman",
@@ -103,7 +110,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/hangman.clinkplugin",
         "sha256": "eb5285ee72007d6640d3694d86c8f7bb44d189b79ae9b4c33e10a2281713ddb5",
         "byteCount": 12645
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "haptic-strength",
@@ -116,7 +124,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/haptic-strength.clinkplugin",
         "sha256": "2fd2c3c1fab33bc1a0fa3bb84fb1a62c959ee31f05d13b173562261ed20a9912",
         "byteCount": 1645
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "heavy-space",
@@ -129,7 +138,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/heavy-space.clinkplugin",
         "sha256": "14ef0c65cee320e5de40592309f8be377cdec6428a6ae6abfdd63440ad601fb7",
         "byteCount": 1568
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "language-badge",
@@ -142,7 +152,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/language-badge.clinkplugin",
         "sha256": "7d027935f1479b45ab909f3bde97a5541c3716098d7d9539329d2d1faaaf9b2a",
         "byteCount": 759
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "language-emoji",
@@ -155,7 +166,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/language-emoji.clinkplugin",
         "sha256": "b7a68db141e3d4711e1a6f243a46e54c33d69fd53278ad37d41773e25fdfcc6f",
         "byteCount": 696
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "language-flag",
@@ -168,7 +180,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/language-flag.clinkplugin",
         "sha256": "c70abfd39665a25c9e0a22b6bbedbcd826879717973742eb5d5ebe98c43ded20",
         "byteCount": 685
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "language-switcher",
@@ -181,7 +194,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/language-switcher.clinkplugin",
         "sha256": "b7332fdc37c4f68437b62aa246c5836e03d1a981c472137db5fd87c9d10e8056",
         "byteCount": 2825
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "light-show",
@@ -194,7 +208,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/light-show.clinkplugin",
         "sha256": "cbee94a8d0b973b92d802c235a1ceccd6cd5b121d0a2b46d68b4a23fdadb8f88",
         "byteCount": 1712
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "low-profile-mod",
@@ -207,7 +222,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/low-profile-mod.clinkplugin",
         "sha256": "68b3c72ce351e8448ce4f7617a2f616813854e10c8cc73be9349ee1308b1bb29",
         "byteCount": 900
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "low-profile",
@@ -220,7 +236,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/low-profile.clinkplugin",
         "sha256": "f6ad069bb1e9a7d2afe0f478bd50bc00501bc144327ab0540eb8e8895366416d",
         "byteCount": 2876
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "mood-ring",
@@ -233,7 +250,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/mood-ring.clinkplugin",
         "sha256": "7d5d3972389e1d46904ce4a1c505e6055c2b89f8d5d72d3e3bbfb780e7a94a22",
         "byteCount": 9681
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "motion-kit",
@@ -246,7 +264,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/motion-kit.clinkplugin",
         "sha256": "ec4b8d0b6089b004d531708ec0ba563cf68130f6e65b00a588f86ac72968ea4c",
         "byteCount": 1821
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "nukey-themes",
@@ -259,7 +278,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/nukey-themes.clinkplugin",
         "sha256": "b94573d54ada5eed0e672986e62cb9e16b381a476f5d3cb93bec01e10d1e3098",
         "byteCount": 7456
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "press-spark",
@@ -272,7 +292,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/press-spark.clinkplugin",
         "sha256": "cbd2afb833bd7cb3e990003503c61ba4ac8ab6ade5cb906ce31774fa4e276611",
         "byteCount": 1718
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "prose-metronome",
@@ -285,7 +306,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/prose-metronome.clinkplugin",
         "sha256": "5419fca1ddc03aecec1560c790519d22a751cbf06c2f3e13973a37964ff5a59e",
         "byteCount": 7403
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "shorthand",
@@ -298,7 +320,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/shorthand.clinkplugin",
         "sha256": "2481d060ad955b2a54aad67482a1c9a5cb44c1132b3c4eaee0ad5da32b1fabbf",
         "byteCount": 2097
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "snowfall",
@@ -311,7 +334,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/snowfall.clinkplugin",
         "sha256": "d01e714f6aefad56823ac870d5ea111c8085d336d3fabe6eaa9e1ea6cd8e7053",
         "byteCount": 1780
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "spacebar-graph",
@@ -324,7 +348,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/spacebar-graph.clinkplugin",
         "sha256": "c3c0fea11ddc8aaea409a49c639df3f48fa8c502fe3238a9252acd94a33dfcd1",
         "byteCount": 5982
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "swipe-trails",
@@ -337,7 +362,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/swipe-trails.clinkplugin",
         "sha256": "4822c355d8213870a7ef13fdb042c9c66ecb90cac89fcf15160e44acf97bb957",
         "byteCount": 4784
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "switch-volume",
@@ -350,7 +376,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/switch-volume.clinkplugin",
         "sha256": "17a0e89932f720758c25d9837e8dc8f9a0158878a9bbde76fd8bb1d62a86f4c4",
         "byteCount": 1485
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "typewriter",
@@ -363,7 +390,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/typewriter.clinkplugin",
         "sha256": "7035f2bc516bd4d5e10f4bff68ddc882c2da22f27a45bd3ae201f99654b5f52b",
         "byteCount": 9306
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "wpm-spacebar",
@@ -376,7 +404,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/wpm-spacebar.clinkplugin",
         "sha256": "7a87fe3e8c1c07c529c3166e69d370a1a6b07882378c2091806ca426c1702bc5",
         "byteCount": 1648
-      }
+      },
+      "platform": "both"
     },
     {
       "id": "wpm-sparkline",
@@ -389,7 +418,8 @@
         "url": "https://github.com/anti-ltd/clink-plugins/releases/download/plugins-8f9d7468035c94859c9df4b3ac020e16a32a11261b05438fa1866ee162b491c7/wpm-sparkline.clinkplugin",
         "sha256": "bd5ade56189006d001065f9a427d8e80c23f833c67a38f6177e23966582b124a",
         "byteCount": 1853
-      }
+      },
+      "platform": "both"
     }
   ]
 }
